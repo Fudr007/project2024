@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 class GamePanel extends JPanel {
-    private final int CELL_SIZE = 40;
-    private final int BOARD_SIZE = 13;
+    private final int CELL_SIZE = 50;
+    private final int BOARD_SIZE = 11;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -31,23 +31,24 @@ class GamePanel extends JPanel {
         g.drawRect(0, 0, BOARD_SIZE * CELL_SIZE, BOARD_SIZE * CELL_SIZE);
 
         // Draw home areas
-        drawHomeArea(g, 0, 11, 2, 2, Color.RED);
+        drawHomeArea(g, 0, 9, 2, 2, Color.RED);
         drawHomeArea(g, 0, 0, 2, 2, Color.GREEN);
-        drawHomeArea(g, 11, 0, 2, 2, Color.BLUE);
-        drawHomeArea(g, 11, 11, 2, 2, Color.YELLOW);
+        drawHomeArea(g, 9, 0, 2, 2, Color.BLUE);
+        drawHomeArea(g, 9, 9, 2, 2, Color.YELLOW);
 
         // Draw starting areas
-        drawStartingArea(g, 5, 11, 1, 1, Color.RED);
-        drawStartingArea(g, 1, 5, 1, 1, Color.GREEN);
-        drawStartingArea(g, 7, 1, 1, 1, Color.BLUE);
-        drawStartingArea(g, 11, 7, 1, 1, Color.YELLOW);
+        drawStartingArea(g, 4, 10, 1, 1, Color.RED);
+        drawStartingArea(g, 0, 4, 1, 1, Color.GREEN);
+        drawStartingArea(g, 6, 0, 1, 1, Color.BLUE);
+        drawStartingArea(g, 10, 6, 1, 1, Color.YELLOW);
 
         //Draw ending areas
-        drawEndArea(g, 6, 7, 1, 4, Color.RED);
-        drawEndArea(g, 2, 6, 4, 1, Color.GREEN);
-        drawEndArea(g, 6, 2, 1, 4, Color.BLUE);
-        drawEndArea(g, 7, 6, 4, 1, Color.YELLOW);
+        drawEndArea(g, 5, 6, 1, 4, Color.RED);
+        drawEndArea(g, 1, 5, 4, 1, Color.GREEN);
+        drawEndArea(g, 5, 1, 1, 4, Color.BLUE);
+        drawEndArea(g, 6, 5, 4, 1, Color.YELLOW);
 
+        //Draw playing area
         drawPlayingArea(g);
     }
 
@@ -70,22 +71,22 @@ class GamePanel extends JPanel {
         g.setColor(Color.DARK_GRAY);
 
         //Draw x lines
-        g.fillRect(2 * CELL_SIZE, 5 * CELL_SIZE, 4 * CELL_SIZE, 1 * CELL_SIZE);
-        g.fillRect(7 * CELL_SIZE, 5 * CELL_SIZE, 5 * CELL_SIZE, 1 * CELL_SIZE);
-        g.fillRect(1 * CELL_SIZE, 7 * CELL_SIZE, 5 * CELL_SIZE, 1 * CELL_SIZE);
-        g.fillRect(7 * CELL_SIZE, 7 * CELL_SIZE, 4 * CELL_SIZE, 1 * CELL_SIZE);
+        g.fillRect(1 * CELL_SIZE, 4 * CELL_SIZE, 4 * CELL_SIZE, 1 * CELL_SIZE);
+        g.fillRect(6 * CELL_SIZE, 4 * CELL_SIZE, 5 * CELL_SIZE, 1 * CELL_SIZE);
+        g.fillRect(0 * CELL_SIZE, 6 * CELL_SIZE, 5 * CELL_SIZE, 1 * CELL_SIZE);
+        g.fillRect(6 * CELL_SIZE, 6 * CELL_SIZE, 4 * CELL_SIZE, 1 * CELL_SIZE);
 
         //Draw y lines
-        g.fillRect(5 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE, 4 * CELL_SIZE);
-        g.fillRect(5 * CELL_SIZE, 8 * CELL_SIZE, 1 * CELL_SIZE, 3 * CELL_SIZE);
-        g.fillRect(7 * CELL_SIZE, 2 * CELL_SIZE, 1 * CELL_SIZE, 3 * CELL_SIZE);
-        g.fillRect(7 * CELL_SIZE, 8 * CELL_SIZE, 1 * CELL_SIZE, 4 * CELL_SIZE);
+        g.fillRect(4 * CELL_SIZE, 0 * CELL_SIZE, 1 * CELL_SIZE, 4 * CELL_SIZE);
+        g.fillRect(4 * CELL_SIZE, 7 * CELL_SIZE, 1 * CELL_SIZE, 3 * CELL_SIZE);
+        g.fillRect(6 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE, 3 * CELL_SIZE);
+        g.fillRect(6 * CELL_SIZE, 7 * CELL_SIZE, 1 * CELL_SIZE, 4 * CELL_SIZE);
 
         //Draw points
-        g.fillRect(6 * CELL_SIZE, 11 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
-        g.fillRect(1 * CELL_SIZE, 6 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
-        g.fillRect(6 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
-        g.fillRect(11 * CELL_SIZE, 6 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
+        g.fillRect(5 * CELL_SIZE, 10 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
+        g.fillRect(0 * CELL_SIZE, 5 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
+        g.fillRect(5 * CELL_SIZE, 0 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
+        g.fillRect(10 * CELL_SIZE, 5 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
     }
 }
 
