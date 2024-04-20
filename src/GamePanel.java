@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 class GamePanel extends JPanel {
+
     private final int CELL_SIZE = 50;
     private final int BOARD_SIZE = 11;
 
@@ -11,7 +12,7 @@ class GamePanel extends JPanel {
         drawBoard(g);
     }
 
-    private void drawBoard(Graphics g) {
+    public void drawBoard(Graphics g) {
         // Draw cells
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
@@ -52,22 +53,22 @@ class GamePanel extends JPanel {
         drawPlayingArea(g);
     }
 
-    private void drawHomeArea(Graphics g, int x, int y, int width, int height, Color color) {
+    public void drawHomeArea(Graphics g, int x, int y, int width, int height, Color color) {
         g.setColor(color);
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, width * CELL_SIZE, height * CELL_SIZE);
     }
 
-    private void drawStartingArea(Graphics g, int x, int y, int width, int height, Color color) {
+    public void drawStartingArea(Graphics g, int x, int y, int width, int height, Color color) {
         g.setColor(color);
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, width * CELL_SIZE, height * CELL_SIZE);
     }
 
-    private void drawEndArea(Graphics g, int x, int y, int width, int height, Color color) {
+    public void drawEndArea(Graphics g, int x, int y, int width, int height, Color color) {
         g.setColor(color);
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, width * CELL_SIZE, height * CELL_SIZE);
     }
 
-    private void drawPlayingArea(Graphics g) {
+    public void drawPlayingArea(Graphics g) {
         g.setColor(Color.DARK_GRAY);
 
         //Draw x lines
@@ -88,5 +89,8 @@ class GamePanel extends JPanel {
         g.fillRect(5 * CELL_SIZE, 0 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
         g.fillRect(10 * CELL_SIZE, 5 * CELL_SIZE, 1 * CELL_SIZE, 1 * CELL_SIZE);
     }
-}
 
+    public void editPlayingArea(){
+
+    }
+}
