@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format">
-      <change afterPath="$PROJECT_DIR$/src/AbstractM.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board">
+      <change afterPath="$PROJECT_DIR$/nwm.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AbstractM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,12 +23,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--tags" />
-        <option name="title" value="All" />
-      </GitPushTagMode>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -42,9 +38,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/Random/Škola/IT/Java/project2024"
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/petrv/IdeaProjects/cvico19_1final",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="RunManager">
@@ -84,14 +86,7 @@
       <option name="project" value="LOCAL" />
       <updated>1713186426003</updated>
     </task>
-    <task id="LOCAL-00003" summary="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format">
-      <created>1713187649184</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1713187649184</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -108,7 +103,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created project2024.iml" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board" />
-    <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format" />
-    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format" />
+    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board" />
   </component>
 </project>
