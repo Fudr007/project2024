@@ -11,7 +11,7 @@ public class Player {
     public Player(String name, int serialNumber) {
         this.name = name;
         this.serialNumber = serialNumber;
-        AbstractM.addFigures(figures, serialNumber);
+        StaticM.addFigures(figures, serialNumber);
     }
 
 

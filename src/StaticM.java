@@ -1,8 +1,7 @@
-import javax.swing.plaf.synth.ColorType;
 import java.util.ArrayList;
 import java.awt.*;
 
-public class AbstractM {
+public class StaticM {
     public static ArrayList<Integer> addFigures(ArrayList<Integer> list, int number){
         list.add(number);
         list.add(number);

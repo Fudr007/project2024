@@ -8,5 +8,6 @@ public class Main {
         GamePanel gamePanel = new GamePanel();
         frame.add(gamePanel);
         frame.setVisible(true);
+
     }
 }

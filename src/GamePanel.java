@@ -61,13 +61,13 @@ class GamePanel extends JPanel {
             int starting = Integer.parseInt(coords[2]);
             System.out.println("x = " + x + ", y = " + y + ", starting = " + starting);
             switch (starting) {
-                case 0:
-                    drawPlayingArea(g, x, y, 1, 1, Color.DARK_GRAY);
-                case 1:
-                    drawPlayingArea(g, x, y, 1, 1, AbstractM.color(count));
+                case 0 -> drawPlayingArea(g, x, y, 1, 1, Color.DARK_GRAY);
+                case 1 -> {
+                    drawPlayingArea(g, x, y, 1, 1, StaticM.color(count));
                     count++;
+                }
+                default -> System.out.println("error");
             }
-
 
         }
 
