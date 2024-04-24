@@ -23,7 +23,6 @@ public class StaticM {
             default:
                 return Color.BLACK;
         }
-
     }
 
 }

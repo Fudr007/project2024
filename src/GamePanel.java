@@ -10,7 +10,7 @@ class GamePanel extends JPanel {
     private final int BOARD_SIZE = 11;
 
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
             drawBoard(g);
@@ -59,7 +59,6 @@ class GamePanel extends JPanel {
             int x = Integer.parseInt(coords[0])-1;
             int y = Integer.parseInt(coords[1])-1;
             int starting = Integer.parseInt(coords[2]);
-            System.out.println("x = " + x + ", y = " + y + ", starting = " + starting);
             switch (starting) {
                 case 0 -> drawPlayingArea(g, x, y, 1, 1, Color.DARK_GRAY);
                 case 1 -> {
