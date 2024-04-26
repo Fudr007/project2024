@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.awt.*;
+import java.util.Random;
 
 public class StaticM {
+
     public static ArrayList<Integer> addFigures(ArrayList<Integer> list, int number){
         list.add(number);
         list.add(number);
@@ -23,6 +25,11 @@ public class StaticM {
             default:
                 return Color.BLACK;
         }
+    }
+
+    public static int dice(){
+        Random r = new Random();
+        return r.nextInt(6) + 1;
     }
 
 }
