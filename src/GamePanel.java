@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -9,12 +10,13 @@ class GamePanel extends JPanel {
     private final int CELL_SIZE = 50;
     private final int BOARD_SIZE = 11;
 
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
             drawBoard(g);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -77,7 +79,7 @@ class GamePanel extends JPanel {
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, width * CELL_SIZE, height * CELL_SIZE);
     }
 
-    public void editPlayingArea(){
+    public void editPlayingArea(Graphics g, int position, int number, int who){
 
     }
 }

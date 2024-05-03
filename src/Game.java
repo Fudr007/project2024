@@ -2,17 +2,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
 
     private ArrayList<Integer> path = new ArrayList<>();
-
-    public Game() {
+    private GamePanel gamePanel = new GamePanel();
+    private JFrame frame = new JFrame("Man Don't Be Angry");
+    private Integer[][] mapa = new Integer[11][11];
+    public Game() throws IOException {
         fillPath();
         player();
         openBoard();
+        fill();
+        returnMapa();
     }
 
     public void fillPath(){
@@ -25,10 +32,8 @@ public class Game {
     }
 
     public void openBoard(){
-        JFrame frame = new JFrame("Man Don't Be Angry");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(560, 585);
-        GamePanel gamePanel = new GamePanel();
         frame.add(gamePanel);
         frame.setVisible(true);
     }
@@ -56,10 +61,10 @@ public class Game {
                     default -> throw new IllegalStateException("Unexpected value: " + count);
                 };
 
-                JFrame frame = new JFrame(name);
-                frame.setSize(300, 80);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setLocationRelativeTo(null);
+                JFrame nameFrame = new JFrame(name);
+                nameFrame.setSize(300, 80);
+                nameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                nameFrame.setLocationRelativeTo(null);
 
                 JPanel panel = new JPanel();
                 panel.setLayout(new BorderLayout());
@@ -67,7 +72,7 @@ public class Game {
 
                 JTextField textField = new JTextField(20);
                 textField.setToolTipText("Type here");
-                frame.add(textField, BorderLayout.NORTH);
+                nameFrame.add(textField, BorderLayout.NORTH);
 
                 JButton button = new JButton();
                 if (!wrong){
@@ -77,22 +82,22 @@ public class Game {
                 }
                 button.setSize(300, 20);
 
-                frame.add(button, BorderLayout.SOUTH);
+                nameFrame.add(button, BorderLayout.SOUTH);
 
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        switch(frame.getName()){
+                        switch(nameFrame.getName()){
                             case "Player 1" -> p1.setName(textField.getText());
                             case "Player 2" -> p1.setName(textField.getText());
                             case "Player 3" -> p1.setName(textField.getText());
                             case "Player 4" -> p1.setName(textField.getText());
                         }
-                        frame.dispose();
+                        nameFrame.dispose();
                     }
                 });
-                frame.add(panel);
-                frame.setVisible(true);
+                nameFrame.add(panel);
+                nameFrame.setVisible(true);
 
                 count++;
             }catch(RuntimeException e){
@@ -101,7 +106,34 @@ public class Game {
             }
         }while(count != 5);
 
+    }
 
-
+    public void fill() throws IOException {
+        BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
+        String line;
+        int countX = 0;
+        int countY = 0;
+        while ((line = rd.readLine()) != null){
+            String[] split = line.split(",");
+            countX = split.length;
+            countY++;
+        }
+        rd.reset();
+        if (countX == countY){
+            for (int i = 0; i<countY; i++){
+                String[] split = rd.readLine().split(",");
+                for (int j = 0; j<countX; j++){
+                    mapa[i][j] = Integer.valueOf(split[j]);
+                }
+            }
+        }
+    }
+    public void returnMapa(){
+        for (int i = 0; i<11; i++){
+            for (int j = 0; j<11; j++){
+                System.out.print(mapa[i][j]+",");
+            }
+            System.out.println();
+        }
     }
 }
