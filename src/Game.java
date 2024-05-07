@@ -13,22 +13,11 @@ public class Game {
     private ArrayList<Integer> path = new ArrayList<>();
     private GamePanel gamePanel = new GamePanel();
     private JFrame frame = new JFrame("Man Don't Be Angry");
-    private Integer[][] mapa = new Integer[11][11];
+
     public Game() throws IOException {
-        fillPath();
         player();
         openBoard();
-        fill();
-        returnMapa();
-    }
-
-    public void fillPath(){
-        for(int i=0 ; i<40; i++){
-            path.add(0);
-        }
-    }
-    public void editPath(){
-
+        gamePanel.doIt();
     }
 
     public void openBoard(){
@@ -106,34 +95,5 @@ public class Game {
             }
         }while(count != 5);
 
-    }
-
-    public void fill() throws IOException {
-        BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
-        String line;
-        int countX = 0;
-        int countY = 0;
-        while ((line = rd.readLine()) != null){
-            String[] split = line.split(",");
-            countX = split.length;
-            countY++;
-        }
-        rd.reset();
-        if (countX == countY){
-            for (int i = 0; i<countY; i++){
-                String[] split = rd.readLine().split(",");
-                for (int j = 0; j<countX; j++){
-                    mapa[i][j] = Integer.valueOf(split[j]);
-                }
-            }
-        }
-    }
-    public void returnMapa(){
-        for (int i = 0; i<11; i++){
-            for (int j = 0; j<11; j++){
-                System.out.print(mapa[i][j]+",");
-            }
-            System.out.println();
-        }
     }
 }

@@ -14,17 +14,14 @@ public class StaticM {
 
     public static Color color(int number){
         switch (number){
-            case 0:
-                return Color.RED;
-            case 1:
-                return Color.GREEN;
-            case 2:
-                return Color.BLUE;
-            case 3:
-                return Color.YELLOW;
-            default:
-                return Color.BLACK;
+            case 0: return Color.BLACK;
+            case -1: return Color.RED;
+            case -2: return Color.GREEN;
+            case -3: return Color.BLUE;
+            case -4: return Color.YELLOW;
+             case 5: return Color.LIGHT_GRAY;
         }
+        return null;
     }
 
     public static int dice(){
