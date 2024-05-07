@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board">
+    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added">
+      <change afterPath="$PROJECT_DIR$/path.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nwm.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StaticM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StaticM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,25 +33,25 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Fudr007"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Fudr007&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Fudr007/project2024",
-    "accountId": "48df9c9a-a903-4c6a-8b5c-fb49ecafe836"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Fudr007/project2024&quot;,
+    &quot;accountId&quot;: &quot;48df9c9a-a903-4c6a-8b5c-fb49ecafe836&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2f8Pf3IVoTjrn9FSomlwRKzQFqi" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -58,24 +60,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Random/Škola/IT/Java/project2024",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "database.data.views.appearance",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Random/Škola/IT/Java/project2024&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;database.data.views.appearance&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -106,7 +108,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1713179834845</updated>
-      <workItem from="1715088573212" duration="2057000" />
+      <workItem from="1715088573212" duration="2317000" />
+      <workItem from="1715096190332" duration="991000" />
     </task>
     <task id="LOCAL-00001" summary="created project2024.iml">
       <created>1713180149013</created>
@@ -151,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715089040462</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added">
+      <option name="closed" value="true" />
+      <created>1715090892308</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715090892308</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,7 +185,8 @@
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board" />
-    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board" />
+    <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added" />
+    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

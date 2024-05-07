@@ -91,4 +91,9 @@ class GamePanel extends JPanel {
         g.setColor(color);
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, width * CELL_SIZE, height * CELL_SIZE);
     }
+
+    public void edit(Graphics g){
+        g.setColor(Color.BLACK);
+        g.fillRoundRect(1,1 , 5,5, 5, 5);
+    }
 }

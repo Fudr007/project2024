@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,6 +11,7 @@ public class Game {
     private ArrayList<Integer> path = new ArrayList<>();
     private GamePanel gamePanel = new GamePanel();
     private JFrame frame = new JFrame("Man Don't Be Angry");
+    private int playerCount = 0;
 
     public Game() throws IOException {
         player();
@@ -28,6 +27,8 @@ public class Game {
     }
 
     public void player(){
+        //dat do tridy player aby se to priradilo rovnou jemu == jednodušší/hezčí
+        //nastavit jen určitý počet hráčů podle playerCount
         Scanner sc = new Scanner(System.in);
         Player p1 = new Player();
         p1.setSerialNumber(1);
@@ -95,5 +96,10 @@ public class Game {
             }
         }while(count != 5);
 
+    }
+
+    public void edith(){
+        gamePanel.edit(frame.getGraphics());
+        frame.repaint();
     }
 }
