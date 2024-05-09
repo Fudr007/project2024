@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added">
-      <change afterPath="$PROJECT_DIR$/path.txt" afterDir="false" />
+    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added&#10;trying to make rendering of figures">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nwm.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StaticM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StaticM.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +109,9 @@
       <option name="presentableId" value="Default" />
       <updated>1713179834845</updated>
       <workItem from="1715088573212" duration="2317000" />
-      <workItem from="1715096190332" duration="991000" />
+      <workItem from="1715096190332" duration="1082000" />
+      <workItem from="1715166368794" duration="2253000" />
+      <workItem from="1715256160367" duration="8874000" />
     </task>
     <task id="LOCAL-00001" summary="created project2024.iml">
       <created>1713180149013</created>
@@ -162,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715090892308</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added&#10;trying to make rendering of figures">
+      <option name="closed" value="true" />
+      <created>1715097267539</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715097267539</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,7 +196,8 @@
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added" />
-    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added" />
+    <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added&#10;trying to make rendering of figures" />
+    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;new way of rendering added&#10;trying to make rendering of figures" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

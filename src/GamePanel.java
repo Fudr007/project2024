@@ -71,20 +71,22 @@ class GamePanel extends JPanel {
             }
         }
 
-        // Draw outer border
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, BOARD_SIZE * CELL_SIZE, BOARD_SIZE * CELL_SIZE);
 
 
-        //Draw playing area
+
         BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                drawPlayingArea(g, i, j, CELL_SIZE, CELL_SIZE, StaticM.color(mapa[i][j]));
+                if (mapa[i][j] == 5 || mapa[i][j] <= 0){
+                    drawPlayingArea(g, i, j, CELL_SIZE, CELL_SIZE, StaticM.color(mapa[i][j]));
+                } else{
+                    drawFigure(g, i, j, CELL_SIZE, CELL_SIZE, StaticM.color(mapa[i][j]));
+                }
+
             }
         }
-
-
     }
 
     public void drawPlayingArea(Graphics g, int x, int y, int width, int height, Color color) {
@@ -92,8 +94,9 @@ class GamePanel extends JPanel {
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, width * CELL_SIZE, height * CELL_SIZE);
     }
 
-    public void edit(Graphics g){
-        g.setColor(Color.BLACK);
-        g.fillRoundRect(1,1 , 5,5, 5, 5);
+    public void drawFigure(Graphics g, int x, int y, int width, int height, Color color) {
+        g.setColor(color);
+        g.fillRoundRect(x, y, width * CELL_SIZE, height * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
+
 }
