@@ -4,30 +4,31 @@ import java.util.Random;
 
 public class StaticM {
 
-    public static ArrayList<Integer> addFigures(ArrayList<Integer> list, int number){
-        list.add(number);
-        list.add(number);
-        list.add(number);
-        list.add(number);
+    public static ArrayList<Integer> addFigures(ArrayList<Integer> list) {
+        list.add(0);
+        list.add(0);
+        list.add(0);
+        list.add(0);
         return list;
     }
 
-    public static Color color(int number){
-        switch (number){
-            case 0:
-                return Color.RED;
-            case 1:
-                return Color.GREEN;
-            case 2:
-                return Color.BLUE;
-            case 3:
-                return Color.YELLOW;
-            default:
-                return Color.BLACK;
-        }
+    public static Color color(int number) {
+        return switch (number) {
+            case 0 -> Color.BLACK;
+            case -1 -> Color.RED;
+            case -2 -> Color.GREEN;
+            case -3 -> Color.BLUE;
+            case -4 -> Color.YELLOW;
+            case 5 -> Color.LIGHT_GRAY;
+            case 1 -> Color.RED;
+            case 2 -> Color.GREEN;
+            case 3 -> Color.BLUE;
+            case 4 -> Color.YELLOW;
+            default -> null;
+        };
     }
 
-    public static int dice(){
+    public static int dice() {
         Random r = new Random();
         return r.nextInt(6) + 1;
     }

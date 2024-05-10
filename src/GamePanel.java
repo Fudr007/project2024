@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -9,6 +8,7 @@ class GamePanel extends JPanel {
 
     private final int CELL_SIZE = 50;
     private final int BOARD_SIZE = 11;
+    private Integer[][] mapa = new Integer[11][11];
 
 
     @Override
@@ -21,8 +21,43 @@ class GamePanel extends JPanel {
         }
     }
 
+    public void doIt() throws IOException {
+        fill();
+        //returnMapa();
+    }
+
+    public void fill() throws IOException {
+        BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
+        String line;
+        int countX = 0;
+        int countY = 0;
+        while ((line = rd.readLine()) != null) {
+            String[] split = line.split(",");
+            countX = split.length;
+            countY++;
+        }
+        BufferedReader rd2 = new BufferedReader(new FileReader("map.csv"));
+        if (countX == countY) {
+            for (int i = 0; i < countY; i++) {
+                String[] split = rd2.readLine().split(",");
+                for (int j = 0; j < countX; j++) {
+                    mapa[i][j] = Integer.valueOf(split[j]);
+                }
+            }
+        }
+    }
+
+    /*public void returnMapa(){
+        for (int i = 0; i<11; i++){
+            for (int j = 0; j<11; j++){
+                System.out.print(mapa[i][j]+",");
+            }
+            System.out.println();
+        }
+    }*/
+
     public void drawBoard(Graphics g) throws IOException {
-        // Draw cells
+
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 int x = i * CELL_SIZE;
@@ -36,42 +71,22 @@ class GamePanel extends JPanel {
             }
         }
 
-        // Draw outer border
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, BOARD_SIZE * CELL_SIZE, BOARD_SIZE * CELL_SIZE);
 
-        // Draw home areas
-        drawPlayingArea(g, 0, 9, 2, 2, Color.RED);
-        drawPlayingArea(g, 0, 0, 2, 2, Color.GREEN);
-        drawPlayingArea(g, 9, 0, 2, 2, Color.BLUE);
-        drawPlayingArea(g, 9, 9, 2, 2, Color.YELLOW);
 
-        //Draw ending areas
-        drawPlayingArea(g, 5, 6, 1, 4, Color.RED);
-        drawPlayingArea(g, 1, 5, 4, 1, Color.GREEN);
-        drawPlayingArea(g, 5, 1, 1, 4, Color.BLUE);
-        drawPlayingArea(g, 6, 5, 4, 1, Color.YELLOW);
 
-        //Draw playing area
-        BufferedReader rd = new BufferedReader(new FileReader("nwm.txt"));
-        String line;
-        int count = 0;
-        while ((line = rd.readLine()) != null) {
-            String[] coords = line.split(",");
-            int x = Integer.parseInt(coords[0])-1;
-            int y = Integer.parseInt(coords[1])-1;
-            int starting = Integer.parseInt(coords[2]);
-            switch (starting) {
-                case 0 -> drawPlayingArea(g, x, y, 1, 1, Color.DARK_GRAY);
-                case 1 -> {
-                    drawPlayingArea(g, x, y, 1, 1, StaticM.color(count));
-                    count++;
+        BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (mapa[i][j] == 5 || mapa[i][j] <= 0){
+                    drawPlayingArea(g, i, j, CELL_SIZE, CELL_SIZE, StaticM.color(mapa[i][j]));
+                } else{
+                    drawFigure(g, i, j, CELL_SIZE, CELL_SIZE, StaticM.color(mapa[i][j]));
                 }
-                default -> System.out.println("error");
+
             }
-
         }
-
     }
 
     public void drawPlayingArea(Graphics g, int x, int y, int width, int height, Color color) {
@@ -79,7 +94,9 @@ class GamePanel extends JPanel {
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, width * CELL_SIZE, height * CELL_SIZE);
     }
 
-    public void editPlayingArea(Graphics g, int position, int number, int who){
-
+    public void drawFigure(Graphics g, int x, int y, int width, int height, Color color) {
+        g.setColor(color);
+        g.fillRoundRect(x, y, width * CELL_SIZE, height * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
+
 }
