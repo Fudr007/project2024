@@ -14,15 +14,31 @@ public class Game {
     Scanner sc = new Scanner(System.in);
 
     public Game() throws IOException {
-        //openMenu();
         setPlayerCount();
         player();
-        openBoard();
+        openMenu();
         gamePanel.doIt();
     }
 
-    public void openMenu(){
+    public void openMenu() {
         menu.openMenu();
+        while(menu.getAction() == -1){
+            System.out.print("");
+        }
+        switch (menu.getAction()) {
+            case 0 -> {
+                System.out.println("0");
+                System.exit(0);
+            }
+            case 1 -> {
+                System.out.println(1);
+                openBoard();
+            }
+            case 2 -> {
+                System.out.println(2);
+                openSettings();
+            }
+        }
     }
 
     public void openBoard() {
@@ -33,14 +49,18 @@ public class Game {
         frame.setVisible(true);
     }
 
+    public void openSettings() {
+
+    }
+
     public void player() {
         for (int i = 0; i < playerCount; i++) {
             players.add(new Player());
-            players.get(i).setSerialNumber(i+1);
+            players.get(i).setSerialNumber(i + 1);
         }
         for (int i = 0; i < playerCount; i++) {
             players.get(i).chooseName();
-            while (players.get(i).getName() == null){
+            while (players.get(i).getName() == null) {
                 System.out.print("");
             }
         }

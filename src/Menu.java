@@ -8,6 +8,7 @@ public class Menu {
     private JButton settingsButton = new JButton("Settings");
     private JButton exitButton = new JButton("Exit");
     private JButton startButton = new JButton("Start");
+    private int action = -1;
 
     public void openMenu(){
         menuFrame.setSize(400, 600);
@@ -18,18 +19,28 @@ public class Menu {
         panel.add(exitButton, BorderLayout.SOUTH);
         panel.add(startButton, BorderLayout.NORTH);
         menuFrame.add(panel);
-
-        exitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
+        exitButton.addActionListener(e -> {
+            setAction(0);
+            System.exit(0);
         });
 
-        startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        startButton.addActionListener(e -> {
+            setAction(1);
+            menuFrame.dispose();
+        });
 
-            }
+        settingsButton.addActionListener(e -> {
+            setAction(2);
+            menuFrame.dispose();
         });
         menuFrame.setVisible(true);
+    }
+
+    public int getAction() {
+        return action;
+    }
+
+    public void setAction(int action) {
+        this.action = action;
     }
 }
