@@ -31,6 +31,7 @@ public class Player {
         JTextField textField = new JTextField(20);
         JButton button = new JButton("Set name");
         frame.setSize(300, 150);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 

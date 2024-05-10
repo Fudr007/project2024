@@ -9,51 +9,39 @@ public class Game {
     private GamePanel gamePanel = new GamePanel();
     private JFrame frame = new JFrame("Man Don't Be Angry");
     private int playerCount = 0;
-    private Player player1 = new Player();
-    private Player player2 = new Player();
-    private Player player3 = new Player();
-    private Player player4 = new Player();
+    private ArrayList<Player> players = new ArrayList<>();
+    private Menu menu = new Menu();
     Scanner sc = new Scanner(System.in);
 
     public Game() throws IOException {
+        //openMenu();
         setPlayerCount();
         player();
         openBoard();
         gamePanel.doIt();
-        sc.nextInt();
-        System.out.println(player1.getName());
-        System.out.println(player2.getName());
+    }
+
+    public void openMenu(){
+        menu.openMenu();
     }
 
     public void openBoard() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(560, 585);
         frame.add(gamePanel);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 
     public void player() {
-        player1.setSerialNumber(1);
-        player2.setSerialNumber(2);
-        player3.setSerialNumber(3);
-        player4.setSerialNumber(4);
-        switch (this.playerCount) {
-            case 2 -> {
-                player1.chooseName();
-                player2.chooseName();
-            }
-            case 3 -> {
-                player1.chooseName();
-                player2.chooseName();
-                player3.chooseName();
-
-            }
-            case 4 -> {
-                player1.chooseName();
-                player2.chooseName();
-                player3.chooseName();
-                player4.chooseName();
-
+        for (int i = 0; i < playerCount; i++) {
+            players.add(new Player());
+            players.get(i).setSerialNumber(i+1);
+        }
+        for (int i = 0; i < playerCount; i++) {
+            players.get(i).chooseName();
+            while (players.get(i).getName() == null){
+                System.out.print("");
             }
         }
     }
