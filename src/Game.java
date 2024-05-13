@@ -10,17 +10,17 @@ public class Game {
     private JFrame frame = new JFrame("Man Don't Be Angry");
     private int playerCount = 0;
     private ArrayList<Player> players = new ArrayList<>();
-    private Menu menu = new Menu();
+    private Settings settings = new Settings();
     Scanner sc = new Scanner(System.in);
 
     public Game() throws IOException {
-        setPlayerCount();
-        player();
         openMenu();
         gamePanel.doIt();
     }
 
     public void openMenu() {
+        Menu menu = new Menu();
+        System.out.println(menu.getAction());
         menu.openMenu();
         while(menu.getAction() == -1){
             System.out.print("");
@@ -32,11 +32,12 @@ public class Game {
             }
             case 1 -> {
                 System.out.println(1);
+                player();
                 openBoard();
             }
             case 2 -> {
                 System.out.println(2);
-                openSettings();
+                returnSettings();
             }
         }
     }
@@ -49,8 +50,12 @@ public class Game {
         frame.setVisible(true);
     }
 
-    public void openSettings() {
-
+    public void returnSettings() {
+        settings.openSettings(Game.this);
+        while(playerCount == 0){
+            System.out.print("");
+        }
+        System.out.println(playerCount);
     }
 
     public void player() {
@@ -70,24 +75,7 @@ public class Game {
         return playerCount;
     }
 
-    public void setPlayerCount() {
-        boolean ok = false;
-        do {
-            try {
-                System.out.println("How many players? (Up to 4)");
-                int num = sc.nextInt();
-                if (num >= 2 && num <= 4) {
-                    this.playerCount = num;
-                } else {
-                    throw new IllegalArgumentException("Player count must be between 2 and 4");
-                }
-                ok = true;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                ok = false;
-            } catch (Exception e) {
-                System.out.println("Only numbers from 2 to 4");
-            }
-        } while (!ok);
+    public void setPlayerCount(int count){
+        this.playerCount = count;
     }
 }

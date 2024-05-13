@@ -13,6 +13,7 @@ public class Menu {
     public void openMenu(){
         menuFrame.setSize(400, 600);
         menuFrame.setResizable(false);
+        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.add(settingsButton, BorderLayout.CENTER);
