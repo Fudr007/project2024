@@ -11,49 +11,67 @@ public class Game {
     private int playerCount = 0;
     private ArrayList<Player> players = new ArrayList<>();
     private Settings settings = new Settings();
-    public Menu menu = new Menu();
+    private Menu menu = new Menu();
+
+
     Scanner sc = new Scanner(System.in);
 
     public Game() throws IOException {
         openMenu();
+    }
+
+    public void openMenu(){
+        boolean ok = false;
+        while (!ok) {
+            System.out.println(menu.getAction());
+            menu.openMenu();
+            while (menu.getAction() == -1) {
+                System.out.print("");
+            }
+            switch (menu.getAction()) {
+                case 0 -> {
+                    System.out.println(0);
+                    System.exit(0);
+                }
+                case 1 -> {
+                    if (playerCount != 0) {
+                        ok = true;
+                        System.out.println(1);
+                        player();
+                        returnBoard();
+                        gameStart();
+                        menu.setAction(-1);
+                    } else {
+                        JOptionPane.showMessageDialog(menu.getFrame(), "First set player count in settings");
+                        menu.setAction(-1);
+                    }
+
+                }
+                case 2 -> {
+                    System.out.println(2);
+                    returnSettings();
+                    menu.setAction(-1);
+                }
+            }
+
+        }
+
+    }
+
+    public void returnBoard() {
         gamePanel.doIt();
     }
 
-    public void openMenu() {
-
-        System.out.println(menu.getAction());
-        menu.openMenu();
-        while(menu.getAction() == -1){
-            System.out.print("");
-        }
-        switch (menu.getAction()) {
-            case 0 -> {
-                System.out.println("0");
-                System.exit(0);
-            }
-            case 1 -> {
-                System.out.println(1);
-                player();
-                openBoard();
-            }
-            case 2 -> {
-                System.out.println(2);
-                returnSettings();
-            }
-        }
-    }
-
-    public void openBoard() {
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(560, 585);
-        frame.add(gamePanel);
-        frame.setResizable(false);
-        frame.setVisible(true);
+    public void gameStart(){
+        System.out.println("game starts");
+        int nwm = sc.nextInt();
+        setFigures();
+        frame.repaint();
     }
 
     public void returnSettings() {
         settings.openSettings(Game.this);
-        while(playerCount == 0){
+        while (playerCount == 0) {
             System.out.print("");
         }
         System.out.println(playerCount);
@@ -72,9 +90,9 @@ public class Game {
         }
     }
 
-    public void setFigures(){
+    public void setFigures() {
         //Player 1
-        //gamePanel.changeMap();
+        gamePanel.changeMap(1, 1, 2);
     }
 
 
@@ -82,7 +100,23 @@ public class Game {
         return playerCount;
     }
 
-    public void setPlayerCount(int count){
+    public void setPlayerCount(int count) {
         this.playerCount = count;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }

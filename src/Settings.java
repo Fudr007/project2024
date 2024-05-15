@@ -22,21 +22,21 @@ public class Settings {
         button2.addActionListener(e -> {
             game.setPlayerCount(2);
             JOptionPane.showMessageDialog(settingsFrame, "Player count set to: 2");
-            settingsFrame.dispose();
-            game.menu.menuFrame.setVisible(true);
+            settingsFrame.setVisible(false);
+            game.getMenu().frameVisible();
         });
 
         button3.addActionListener(e -> {
             game.setPlayerCount(3);
             JOptionPane.showMessageDialog(settingsFrame, "Player count set to: 3");
-            settingsFrame.dispose();
-            game.menu.menuFrame.setVisible(true);
+            settingsFrame.setVisible(false);
+            game.getMenu().frameVisible();
         });
 
         button4.addActionListener(e -> {
             game.setPlayerCount(4);
             JOptionPane.showMessageDialog(settingsFrame, "Player count set to: 4");
-            settingsFrame.dispose();
+            settingsFrame.setVisible(false);
             game.openMenu();
         });
 
@@ -47,5 +47,13 @@ public class Settings {
 
         settingsFrame.setVisible(true);
 
+    }
+
+    public void frameVisible(){
+        settingsFrame.setVisible(true);
+    }
+
+    public void frameInvisible(){
+        settingsFrame.setVisible(false);
     }
 }
