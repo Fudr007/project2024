@@ -8,7 +8,7 @@ class GamePanel extends JPanel {
 
     private final int CELL_SIZE = 50;
     private final int BOARD_SIZE = 11;
-    private Integer[][] mapa = new Integer[11][11];
+    private Integer[][] map = new Integer[11][11];
 
 
     @Override
@@ -26,6 +26,14 @@ class GamePanel extends JPanel {
         //returnMapa();
     }
 
+    public void changeMap(int x, int y, int who){
+        switch (who){
+            case 1:
+
+        }
+        map[x][y] = who;
+    }
+
     public void fill() throws IOException {
         BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
         String line;
@@ -41,7 +49,7 @@ class GamePanel extends JPanel {
             for (int i = 0; i < countY; i++) {
                 String[] split = rd2.readLine().split(",");
                 for (int j = 0; j < countX; j++) {
-                    mapa[i][j] = Integer.valueOf(split[j]);
+                    map[i][j] = Integer.valueOf(split[j]);
                 }
             }
         }
@@ -79,12 +87,11 @@ class GamePanel extends JPanel {
         BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                if (mapa[i][j] == 5 || mapa[i][j] <= 0){
-                    drawPlayingArea(g, i, j, CELL_SIZE, CELL_SIZE, StaticM.color(mapa[i][j]));
+                if (map[i][j] == 5 || map[i][j] <= 0){
+                    drawPlayingArea(g, i, j, CELL_SIZE, CELL_SIZE, StaticM.color(map[i][j]));
                 } else{
-                    drawFigure(g, i, j, CELL_SIZE, CELL_SIZE, StaticM.color(mapa[i][j]));
+                    drawFigure(g, i, j, CELL_SIZE, CELL_SIZE, StaticM.color(map[i][j]));
                 }
-
             }
         }
     }

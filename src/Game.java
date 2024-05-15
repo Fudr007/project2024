@@ -11,6 +11,7 @@ public class Game {
     private int playerCount = 0;
     private ArrayList<Player> players = new ArrayList<>();
     private Settings settings = new Settings();
+    public Menu menu = new Menu();
     Scanner sc = new Scanner(System.in);
 
     public Game() throws IOException {
@@ -19,7 +20,7 @@ public class Game {
     }
 
     public void openMenu() {
-        Menu menu = new Menu();
+
         System.out.println(menu.getAction());
         menu.openMenu();
         while(menu.getAction() == -1){
@@ -70,6 +71,12 @@ public class Game {
             }
         }
     }
+
+    public void setFigures(){
+        //Player 1
+        //gamePanel.changeMap();
+    }
+
 
     public int getPlayerCount() {
         return playerCount;

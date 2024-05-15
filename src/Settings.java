@@ -23,14 +23,14 @@ public class Settings {
             game.setPlayerCount(2);
             JOptionPane.showMessageDialog(settingsFrame, "Player count set to: 2");
             settingsFrame.dispose();
-            game.openMenu();
+            game.menu.menuFrame.setVisible(true);
         });
 
         button3.addActionListener(e -> {
             game.setPlayerCount(3);
             JOptionPane.showMessageDialog(settingsFrame, "Player count set to: 3");
             settingsFrame.dispose();
-            game.openMenu();
+            game.menu.menuFrame.setVisible(true);
         });
 
         button4.addActionListener(e -> {

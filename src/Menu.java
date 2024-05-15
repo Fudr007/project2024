@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Menu {
-    private JFrame menuFrame = new JFrame();
+    public JFrame menuFrame = new JFrame();
     private JButton settingsButton = new JButton("Settings");
     private JButton exitButton = new JButton("Exit");
     private JButton startButton = new JButton("Start");
@@ -27,12 +27,12 @@ public class Menu {
 
         startButton.addActionListener(e -> {
             setAction(1);
-            menuFrame.dispose();
+            menuFrame.setVisible(false);
         });
 
         settingsButton.addActionListener(e -> {
             setAction(2);
-            menuFrame.dispose();
+            menuFrame.setVisible(false);
         });
         menuFrame.setVisible(true);
     }
