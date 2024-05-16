@@ -4,25 +4,22 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static java.lang.Math.abs;
+
 class GamePanel extends JPanel {
 
     private final int CELL_SIZE = 50;
     private final int BOARD_SIZE = 11;
     private Integer[][] map = new Integer[11][11];
-    private JPanel panel = new JPanel();
+    private JPanel transparentPanel = new JPanel();
     private JFrame frame = new JFrame("Man don't be angry");
 
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        try {
-            drawBoard(g);
-            drawTransparent(g);
-        } catch (Exception e) {
-            System.out.println("Files not found");
-            System.exit(0);
-        }
+        drawBoard(g);
+        drawTransparent(g);
     }
 
     public void doIt() {
@@ -40,9 +37,10 @@ class GamePanel extends JPanel {
         //returnMapa();
     }
 
-    public void changeMap(int x, int y, int who){
+    public void changeMap(int x, int y, int who) {
         map[x][y] = who;
-        panel.repaint();
+        repaint();
+        transparentPanel.repaint();
     }
 
     public void fill() throws IOException {
@@ -75,7 +73,7 @@ class GamePanel extends JPanel {
         }
     }*/
 
-    public void drawBoard(Graphics g) throws IOException {
+    public void drawBoard(Graphics g){
 
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
@@ -93,40 +91,44 @@ class GamePanel extends JPanel {
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, BOARD_SIZE * CELL_SIZE, BOARD_SIZE * CELL_SIZE);
 
-
-
-        BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                if (map[i][j] == 5 || map[i][j] <= 0){
+                if (map[i][j] == 5 || map[i][j] <= 0) {
                     drawPlayingArea(g, i, j, StaticM.color(map[i][j]));
+                    //System.out.println("squares");
+                }else {
+                    drawFigure(g, i, j, map[i][j]);
+                    //System.out.println("figures");
                 }
             }
         }
     }
 
-    public void drawTransparent(Graphics g) throws IOException {
-        panel.paintAll(g);
-        panel.setOpaque(true);
-        BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
+    public void drawTransparent(Graphics g){
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                if (map[i][j] > 0 || map[i][j] < 5){
-                    drawFigure(g, i, j, StaticM.color(map[i][j]));
+                if (map[i][j] < 5 || map[i][j] > 0) {
+                    drawFigure(g, i, j, map[i][j]);
                 }
             }
         }
-
+        transparentPanel.paintAll(g);
+        transparentPanel.setOpaque(true);
     }
 
     public void drawPlayingArea(Graphics g, int x, int y, Color color) {
         g.setColor(color);
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        g.setColor(Color.DARK_GRAY);
+        g.drawRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+
     }
 
-    public void drawFigure(Graphics g, int x, int y, Color color) {
-        g.setColor(color);
-        g.fillRoundRect(x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    public void drawFigure(Graphics g, int x, int y, int color) {
+        g.setColor(StaticM.color(abs(color)));
+        g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        g.setColor(StaticM.color(color));
+        g.drawRoundRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE-5, CELL_SIZE-5, CELL_SIZE-5, CELL_SIZE-5);
     }
 
 }

@@ -19,6 +19,7 @@ public class Player {
     }
 
     public Player() {
+        StaticM.addFigures(figuresPosition);
     }
 
     public String getName() {
