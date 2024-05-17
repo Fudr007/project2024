@@ -131,4 +131,7 @@ class GamePanel extends JPanel {
         g.drawRoundRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE-5, CELL_SIZE-5, CELL_SIZE-5, CELL_SIZE-5);
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
 }

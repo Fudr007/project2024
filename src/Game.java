@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,11 +18,11 @@ public class Game {
     Scanner sc = new Scanner(System.in);
     private int who = 1;
 
-    public Game(){
+    public Game() {
         openMenu();
     }
 
-    public void openMenu(){
+    public void openMenu() {
         boolean ok = false;
         while (!ok) {
             System.out.println(menu.getAction());
@@ -56,22 +59,27 @@ public class Game {
 
     }
 
-    public void gameStart(){
+    public void gameStart() {
         gamePanel.doIt();
         System.out.println("game starts");
         int nwm = sc.nextInt();
         setFigures();
         dice.openDice();
         boolean end = false;
-        while (!end){
+        while (!end) {
             System.out.println(who);
-            dice.changeName(players.get(who-1));
+            dice.changeName(players.get(who - 1));
 
-
-            if (who == playerCount){
+            for (int i = 0; i < playerCount; i++) {
+                if (players.get(i).isAtHome()) {
+                    end = true;
+                    JOptionPane.showMessageDialog(gamePanel.getFrame(), players.get(i).getName() + " win!!! Congratulations!");
+                }
+            }
+            if (who == playerCount) {
                 setWho(1);
-            }else {
-                setWho(getWho()+1);
+            } else {
+                setWho(getWho() + 1);
             }
         }
     }
@@ -98,28 +106,40 @@ public class Game {
     }
 
     public void setFigures() {
-        gamePanel.changeMap(0, 0, 2);
-        gamePanel.changeMap(1, 0, 2);
-        gamePanel.changeMap(0, 1, 2);
-        gamePanel.changeMap(1, 1, 2);
-
-        gamePanel.changeMap(9, 0, 3);
-        gamePanel.changeMap(10, 1, 3);
-        gamePanel.changeMap(9, 0, 3);
-        gamePanel.changeMap(10, 1, 3);
-
-        gamePanel.changeMap(9, 9, 4);
-        gamePanel.changeMap(10, 10, 4);
-        gamePanel.changeMap(9, 10, 4);
-        gamePanel.changeMap(10, 9, 4);
-
-        gamePanel.changeMap(0, 9, 1);
-        gamePanel.changeMap(1, 10, 1);
-        gamePanel.changeMap(0, 10, 1);
-        gamePanel.changeMap(1, 9, 1);
-
+        try {
+            BufferedReader rd = new BufferedReader(new FileReader("homes.txt"));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                String[] lineSplit = line.split(",");
+                int x = Integer.parseInt(lineSplit[0]);
+                int y = Integer.parseInt(lineSplit[1]);
+                int who = Integer.parseInt(lineSplit[2]);
+                gamePanel.changeMap(x, y, who);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(gamePanel.getFrame(), "File not found, " +
+                    "check if you have every file that is needed to run this program and try again");
+            System.exit(0);
+        }
     }
 
+    public void moveFigure(Player player, int dice, int figure){
+        try {
+            BufferedReader rd = new BufferedReader(new FileReader("path.txt"));
+            int where = player.getFiguresPosition(figure);
+            if (where == 0){
+                player.setFiguresPosition(figure, ((player.getSerialNumber()-1)*10)+1);
+            } else if (player.getSerialNumber() != 1 && (where+dice) > 40) {
+                
+            }
+            player.setFiguresPosition(figure, where+dice);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(gamePanel.getFrame(), "File not found, " +
+                    "check if you have every file that is needed to run this program and try again");
+            System.exit(0);
+        }
+
+    }
 
     public int getPlayerCount() {
         return playerCount;
@@ -127,10 +147,6 @@ public class Game {
 
     public void setPlayerCount(int count) {
         this.playerCount = count;
-    }
-
-    public Settings getSettings() {
-        return settings;
     }
 
     public Menu getMenu() {

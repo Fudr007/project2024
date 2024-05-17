@@ -10,7 +10,7 @@ public class Player {
     private int serialNumber;
     private boolean atHome = false;
     private int howManyAtHome = 0;
-    private ArrayList<Integer> figuresPosition = new ArrayList<>();
+    private ArrayList<Integer> figuresPosition = new ArrayList<>(4);
 
     public Player(String name, int serialNumber) {
         this.name = name;
@@ -19,7 +19,7 @@ public class Player {
     }
 
     public Player() {
-        StaticM.addFigures(figuresPosition);
+        figuresPosition = StaticM.addFigures(figuresPosition);
     }
 
     public String getName() {
@@ -81,19 +81,22 @@ public class Player {
     }
 
     public boolean isAtHome() {
-        return atHome;
+        int count = 0;
+        for (int i = 0; i<figuresPosition.size(); i++){
+            count += figuresPosition.get(i);
+        }
+        if (count == 170) {
+            return atHome = true;
+        }else{
+            return atHome = false;
+        }
     }
 
-    public void setAtHome(boolean atHome) {
-        this.atHome = atHome;
+    public int getFiguresPosition(int i) {
+        return figuresPosition.get(i);
     }
 
-    public int getHowManyAtHome() {
-        return howManyAtHome;
+    public void setFiguresPosition(int which, int i) {
+        figuresPosition.set(which, i);
     }
-
-    public void setHowManyAtHome(int howManyAtHome) {
-        this.howManyAtHome = howManyAtHome;
-    }
-
 }
