@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,8 +67,15 @@ public class Game {
         boolean end = false;
         while (!end) {
             System.out.println(who);
-            dice.changeName(players.get(who - 1));
-
+            dice.changeName(players.get(who-1));
+            while(dice.getThrownNumber() == 0){
+                System.out.print("");
+            }
+            int which = players.get(who-1).whichFigure;
+            while(which == -1){
+                System.out.print("");
+            }
+            moveFigure(players.get(who - 1), dice.getThrownNumber(), which);
             for (int i = 0; i < playerCount; i++) {
                 if (players.get(i).isAtHome()) {
                     end = true;
@@ -81,6 +87,7 @@ public class Game {
             } else {
                 setWho(getWho() + 1);
             }
+            dice.clearNumber();
         }
     }
 
@@ -95,7 +102,7 @@ public class Game {
     public void player() {
         for (int i = 0; i < playerCount; i++) {
             players.add(new Player());
-            players.get(i).setSerialNumber(i + 1);
+            players.get(i).setOrderNumber(i + 1);
         }
         for (int i = 0; i < playerCount; i++) {
             players.get(i).chooseName();
@@ -128,11 +135,14 @@ public class Game {
             BufferedReader rd = new BufferedReader(new FileReader("path.txt"));
             int where = player.getFiguresPosition(figure);
             if (where == 0){
-                player.setFiguresPosition(figure, ((player.getSerialNumber()-1)*10)+1);
-            } else if (player.getSerialNumber() != 1 && (where+dice) > 40) {
-                
+                player.setFiguresPosition(figure, ((player.getOrderNumber()-1)*StaticM.playerShift(player))+1);
+            } else {
+                player.setFiguresPosition(figure, where+dice);
             }
-            player.setFiguresPosition(figure, where+dice);
+
+            if (player.isMovable(figure) && player.getHowManyAtHome() <= 3){
+
+            }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(gamePanel.getFrame(), "File not found, " +
                     "check if you have every file that is needed to run this program and try again");

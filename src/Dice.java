@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Dice {
@@ -8,6 +7,7 @@ public class Dice {
     private JPanel panel = new JPanel();
     private JButton numberButton = new JButton("next number");
     private JLabel randomNumber = new JLabel("Press the button");
+    public int thrownNumber = 0;
 
     public void openDice(){
         diceFrame.setSize(500, 100);
@@ -20,6 +20,7 @@ public class Dice {
 
         numberButton.addActionListener(e -> {
             randomNumber.setText(""+getNumber());
+            thrownNumber = Integer.parseInt(randomNumber.getText());
         });
         diceFrame.setVisible(true);
     }
@@ -31,5 +32,13 @@ public class Dice {
 
     public void changeName(Player p){
         diceFrame.setName(p.getName()+" is throwing");
+    }
+
+    public int getThrownNumber(){
+        return thrownNumber;
+    }
+
+    public void clearNumber(){
+        this.thrownNumber = 0;
     }
 }

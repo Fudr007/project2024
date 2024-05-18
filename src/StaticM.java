@@ -31,4 +31,13 @@ public class StaticM {
         };
     }
 
+    public static int playerShift(Player player) {
+        return switch (player.getOrderNumber()){
+            case 1 -> 1;
+            case 2 -> 10;
+            case 3 -> 20;
+            case 4 -> 30;
+            default -> throw new IllegalStateException("Unexpected value: " + player.getOrderNumber());
+        };
+    }
 }
