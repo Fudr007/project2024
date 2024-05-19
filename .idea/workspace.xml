@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;moving figures">
+    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces">
+      <change afterPath="$PROJECT_DIR$/homes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/path.txt" beforeDir="false" afterPath="$PROJECT_DIR$/path.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StaticM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StaticM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/homes.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +123,8 @@
       <workItem from="1715336124690" duration="6000" />
       <workItem from="1715338662975" duration="716000" />
       <workItem from="1715770677601" duration="203000" />
-      <workItem from="1716031852277" duration="1578000" />
+      <workItem from="1716031852277" duration="1645000" />
+      <workItem from="1716116766735" duration="1197000" />
     </task>
     <task id="LOCAL-00001" summary="created project2024.iml">
       <created>1713180149013</created>
@@ -221,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715940040685</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces">
+      <option name="closed" value="true" />
+      <created>1716037840407</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1716037840407</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,7 +259,8 @@
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;moving figures" />
-    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;moving figures" />
+    <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces" />
+    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

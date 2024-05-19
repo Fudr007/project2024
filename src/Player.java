@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 
 public class Player {
@@ -11,7 +13,8 @@ public class Player {
     private boolean atHome = false;
     private int howManyAtHome = 0;
     private ArrayList<Integer> figuresPosition = new ArrayList<>(4);
-    int whichFigure = -1;
+    private int[][] startingPosition = new int[2][4];
+    private int whichFigure = -1;
 
     public Player(String name, int orderNumber) {
         this.name = name;
@@ -182,5 +185,31 @@ public class Player {
 
     public void setWhichFigure(int whichFigure) {
         this.whichFigure = whichFigure;
+    }
+
+    public void kickOutFigure(int whichFigure){
+        figuresPosition.set(whichFigure, 0);
+    }
+
+    public void setStartingPosition(){
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("homes.txt"));
+            String line;
+            int count = 0;
+            while((line = reader.readLine()) != null){
+                String[] parts = line.split(",");
+                if (orderNumber == Integer.parseInt(parts[2])){
+                     startingPosition[0][count] = Integer.parseInt(parts[0]);
+                     startingPosition[1][count] = Integer.parseInt(parts[1]);
+                     count++;
+                }
+            }
+        } catch (IOException e) {
+
+            JOptionPane.showMessageDialog(null, "File not found, " +
+                    "check if you have every file that is needed to run this program and try again");
+            System.exit(0);
+        }
+
     }
 }

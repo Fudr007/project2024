@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.Scanner;
 
 public class Game {
 
-    private ArrayList<Integer> path = new ArrayList<>();
+    private int[][] path = new int[3][55];
     private GamePanel gamePanel = new GamePanel();
     private int playerCount = 0;
     private ArrayList<Player> players = new ArrayList<>();
@@ -19,6 +20,25 @@ public class Game {
 
     public Game() {
         openMenu();
+        setPath();
+    }
+
+    public void setPath() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("path.txt"));
+            String line;
+            for (int i = 0; i < 55; i++) {
+                line = br.readLine();
+                String[] split = line.split(",");
+                for (int j = 0; j < 3; j++) {
+                    path[j][i] = Integer.parseInt(split[j]);
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "File not found, " +
+                    "check if you have every file that is needed to run this program and try again");
+            System.exit(0);
+        }
     }
 
     public void openMenu() {
@@ -63,16 +83,19 @@ public class Game {
         System.out.println("game starts");
         int nwm = sc.nextInt();
         setFigures();
+        for (int i = 0; i < playerCount; i++) {
+            players.get(i).setStartingPosition();
+        }
         dice.openDice();
         boolean end = false;
         while (!end) {
             System.out.println(who);
-            dice.changeName(players.get(who-1));
-            while(dice.getThrownNumber() == 0){
+            dice.changeName(players.get(who - 1));
+            while (dice.getThrownNumber() == 0) {
                 System.out.print("");
             }
-            int which = players.get(who-1).whichFigure;
-            while(which == -1){
+            int which = players.get(who - 1).whichFigure();
+            while (which == -1) {
                 System.out.print("");
             }
             moveFigure(players.get(who - 1), dice.getThrownNumber(), which);
@@ -130,25 +153,31 @@ public class Game {
         }
     }
 
-    public void moveFigure(Player player, int dice, int figure){
-        try {
-            BufferedReader rd = new BufferedReader(new FileReader("path.txt"));
-            int where = player.getFiguresPosition(figure);
-            if (where == 0){
-                player.setFiguresPosition(figure, ((player.getOrderNumber()-1)*StaticM.playerShift(player))+1);
-            } else {
-                player.setFiguresPosition(figure, where+dice);
-            }
+    public void moveFigure(Player player, int dice, int figure) {
 
-            if (player.isMovable(figure) && player.getHowManyAtHome() <= 3){
-
+        int where = player.getFiguresPosition(figure);
+        if (where == 0) {
+            int shift = 0;
+            if (player.getOrderNumber() == 1){
+                shift = 0;
+            }else{
+                shift = StaticM.playerShift(player);
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(gamePanel.getFrame(), "File not found, " +
-                    "check if you have every file that is needed to run this program and try again");
-            System.exit(0);
+            String[] split = getPathLocation(shift).split(",");
+            int x = Integer.parseInt(split[0]);
+            int y = Integer.parseInt(split[1]);
+            if(gamePanel.getLocation(x,y) > 0){
+                //dodelat vyhození figurky a místo ní dat jinou
+            }
+            player.setFiguresPosition(figure, ((player.getOrderNumber() - 1) * StaticM.playerShift(player)) + 1);
+        } else {
+            player.setFiguresPosition(figure, where + dice);
         }
 
+    }
+
+    public String getPathLocation(int y) {
+        return path[y][0]+","+path[y][1];
     }
 
     public int getPlayerCount() {

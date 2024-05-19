@@ -43,6 +43,10 @@ class GamePanel extends JPanel {
         transparentPanel.repaint();
     }
 
+    public int getLocation(int x, int y) {
+        return map[x][y];
+    }
+
     public void fill() throws IOException {
         BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
         String line;
