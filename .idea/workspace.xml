@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces">
-      <change afterPath="$PROJECT_DIR$/homes.txt" afterDir="false" />
+    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces&#10;moveFigure editing">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_05_2024_16_36_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_05_2024_16_36__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_05_2024_15_54_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_05_2024_15_54__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_05_2024_8_03_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_05_2024_8_03__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/homes.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +127,8 @@
       <workItem from="1715338662975" duration="716000" />
       <workItem from="1715770677601" duration="203000" />
       <workItem from="1716031852277" duration="1645000" />
-      <workItem from="1716116766735" duration="1197000" />
+      <workItem from="1716116766735" duration="1234000" />
+      <workItem from="1716393772223" duration="708000" />
     </task>
     <task id="LOCAL-00001" summary="created project2024.iml">
       <created>1713180149013</created>
@@ -230,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716037840407</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces&#10;moveFigure editing">
+      <option name="closed" value="true" />
+      <created>1716121673106</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1716121673106</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +272,8 @@
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;moving figures" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces" />
-    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces" />
+    <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces&#10;moveFigure editing" />
+    <option name="LAST_COMMIT_MESSAGE" value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces&#10;moveFigure editing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

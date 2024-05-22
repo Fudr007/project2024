@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,6 +86,7 @@ public class Game {
             players.get(i).setStartingPosition();
         }
         dice.openDice();
+
         boolean end = false;
         while (!end) {
             System.out.println(who);
@@ -94,21 +94,39 @@ public class Game {
             while (dice.getThrownNumber() == 0) {
                 System.out.print("");
             }
-            int which = players.get(who - 1).whichFigure();
-            while (which == -1) {
-                System.out.print("");
+            int which = -1;
+            if (players.get(who - 1).getHowManyAtHome() < 3){
+                which = players.get(who - 1).whichFigure();
+                while (which == -1) {
+                    System.out.print("");
+                }
+            }else{
+                for (int i = 0; i < 4; i++){
+                    if(players.get(who - 1).isMovable(i)){
+                        which = i;
+                    }
+                }
             }
+
             moveFigure(players.get(who - 1), dice.getThrownNumber(), which);
+
+            //end
             for (int i = 0; i < playerCount; i++) {
                 if (players.get(i).isAtHome()) {
                     end = true;
                     JOptionPane.showMessageDialog(gamePanel.getFrame(), players.get(i).getName() + " win!!! Congratulations!");
+                    try {
+                        wait(1000);
+                    } catch (InterruptedException e) {
+                        System.out.println("Interrupted");
+                    }
+                    System.exit(0);
                 }
-            }
+            }//
             if (who == playerCount) {
-                setWho(1);
+                this.who = 1;
             } else {
-                setWho(getWho() + 1);
+                this.who = who + 1;
             }
             dice.clearNumber();
         }
@@ -168,8 +186,19 @@ public class Game {
             int y = Integer.parseInt(split[1]);
             if(gamePanel.getLocation(x,y) > 0){
                 //dodelat vyhození figurky a místo ní dat jinou
+                for (int i = 0; i < 4; i++) {
+                    if (players.get(gamePanel.getLocation(x, y)).getFiguresPosition(i) == getLocationOnPath(x, y)){
+                        players.get(gamePanel.getLocation(x, y)).kickOutFigure(i);
+                        String[] strings = players.get(gamePanel.getLocation(x, y)).getStartingPosition(i).split(",");
+                        int x1 = Integer.parseInt(strings[0]);
+                        int y1 = Integer.parseInt(strings[1]);
+                        gamePanel.changeMap(x1, y1, gamePanel.getLocation(x,y));
+                    }
+                }
             }
-            player.setFiguresPosition(figure, ((player.getOrderNumber() - 1) * StaticM.playerShift(player)) + 1);
+            player.setFiguresPosition(figure, ((player.getOrderNumber() - 1) * StaticM.playerShift(player)) + 1 + player.getFiguresPosition(figure));
+        } else if (where+dice > player.howMuchMovable(figure)) {
+            JOptionPane.showMessageDialog(gamePanel.getFrame(), "");
         } else {
             player.setFiguresPosition(figure, where + dice);
         }
@@ -178,6 +207,16 @@ public class Game {
 
     public String getPathLocation(int y) {
         return path[y][0]+","+path[y][1];
+    }
+
+    public int getLocationOnPath(int x, int y) {
+        int location = 0;
+        for (int i = 0; i < path.length; i++){
+            if (path[i][0] == x && path[i][1] == y) {
+                location = i;
+            }
+        }
+        return location;
     }
 
     public int getPlayerCount() {
@@ -190,13 +229,5 @@ public class Game {
 
     public Menu getMenu() {
         return menu;
-    }
-
-    public int getWho() {
-        return who;
-    }
-
-    public void setWho(int who) {
-        this.who = who;
     }
 }

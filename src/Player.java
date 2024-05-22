@@ -205,11 +205,14 @@ public class Player {
                 }
             }
         } catch (IOException e) {
-
             JOptionPane.showMessageDialog(null, "File not found, " +
                     "check if you have every file that is needed to run this program and try again");
             System.exit(0);
         }
 
+    }
+
+    public String getStartingPosition(int whichFigure) {
+        return startingPosition[0][whichFigure] + "," + startingPosition[1][whichFigure];
     }
 }
