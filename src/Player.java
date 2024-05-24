@@ -1,9 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.*;
-import java.nio.Buffer;
 import java.util.ArrayList;
 
 public class Player {
@@ -104,7 +102,11 @@ public class Player {
     }
 
     public boolean isMovable(int which) {
-        if (figuresPosition.get(which) >= (41 + ((orderNumber - 1) * 4)) && figuresPosition.get(which) <= (44 + ((orderNumber - 1) * 4))) {
+        int shift = StaticM.playerShift(Player.this);
+        if (shift == 1) {
+            shift = 0;
+        }
+        if (figuresPosition.get(which) >= (41 + (orderNumber * shift)) && figuresPosition.get(which) <= 44 + (orderNumber * shift)) {
             return false;
         } else {
             return true;
@@ -154,13 +156,14 @@ public class Player {
         panel.setLayout(new BorderLayout());
         panel.add(textField, BorderLayout.CENTER);
         panel.add(button, BorderLayout.SOUTH);
+        frame.add(panel);
 
         button.addActionListener(e -> {
             String input = textField.getText();
-            if (input.matches("^[0-4]&")) {
+            if (input.matches("^[1-4]")) {
                 int index = Integer.parseInt(input);
                 setWhichFigure(index);
-                frame.dispose();
+                //frame.dispose();
             } else {
                 button.setText("Just members 1 to 4");
             }
@@ -174,8 +177,11 @@ public class Player {
                 }
             }
         });
+        frame.setVisible(true);
         int remember = getWhichFigure();
+        System.out.println(getWhichFigure());
         setWhichFigure(0);
+        System.out.println(remember);
         return remember;
     }
 

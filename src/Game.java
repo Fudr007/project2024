@@ -89,27 +89,37 @@ public class Game {
 
         boolean end = false;
         while (!end) {
+            boolean ok = false;
             System.out.println(who);
             dice.changeName(players.get(who - 1));
             while (dice.getThrownNumber() == 0) {
                 System.out.print("");
             }
             int which = -1;
-            if (players.get(who - 1).getHowManyAtHome() < 3){
-                which = players.get(who - 1).whichFigure();
-                while (which == -1) {
-                    System.out.print("");
+            if (players.get(who - 1).getHowManyAtHome() < 3) {
+                while(!ok){
+                    which = players.get(who - 1).whichFigure();
+
+                    while (which == -1) {
+                        which = players.get(who - 1).getWhichFigure();
+                    }
+                    System.out.println("neni");
+                    if (players.get(who - 1).howMuchMovable(which) < dice.getThrownNumber()) {
+                        ok = false;
+                        JOptionPane.showMessageDialog(gamePanel.getFrame(), "You can't move with this one");
+                    }else{
+                        ok = true;
+                    }
                 }
-            }else{
-                for (int i = 0; i < 4; i++){
-                    if(players.get(who - 1).isMovable(i)){
+            } else {
+                for (int i = 0; i < 4; i++) {
+                    if (players.get(who - 1).isMovable(i)) {
                         which = i;
                     }
                 }
             }
 
             moveFigure(players.get(who - 1), dice.getThrownNumber(), which);
-
             //end
             for (int i = 0; i < playerCount; i++) {
                 if (players.get(i).isAtHome()) {
@@ -172,55 +182,61 @@ public class Game {
     }
 
     public void moveFigure(Player player, int dice, int figure) {
-
+        //dodelat cisteni za sebou, kdyz se figurka pohne tak vratit na mapu puvodni hodnotu
+        int x = 0;
+        int y = 0;
         int where = player.getFiguresPosition(figure);
+        int shift = StaticM.playerShift(player);
+        if (shift == 1) {
+            shift = 0;
+        }
+
         if (where == 0) {
-            int shift = 0;
-            if (player.getOrderNumber() == 1){
+            if (player.getOrderNumber() == 1) {
                 shift = 0;
-            }else{
+            } else {
                 shift = StaticM.playerShift(player);
             }
             String[] split = getPathLocation(shift).split(",");
-            int x = Integer.parseInt(split[0]);
-            int y = Integer.parseInt(split[1]);
-            if(gamePanel.getLocation(x,y) > 0){
-                //dodelat vyhození figurky a místo ní dat jinou
-                for (int i = 0; i < 4; i++) {
-                    if (players.get(gamePanel.getLocation(x, y)).getFiguresPosition(i) == getLocationOnPath(x, y)){
-                        players.get(gamePanel.getLocation(x, y)).kickOutFigure(i);
-                        String[] strings = players.get(gamePanel.getLocation(x, y)).getStartingPosition(i).split(",");
-                        int x1 = Integer.parseInt(strings[0]);
-                        int y1 = Integer.parseInt(strings[1]);
-                        gamePanel.changeMap(x1, y1, gamePanel.getLocation(x,y));
-                    }
+            x = Integer.parseInt(split[0]);
+            y = Integer.parseInt(split[1]);
+            gamePanel.changeMap(x, y, player.getOrderNumber());
+            player.setFiguresPosition(figure, ((player.getOrderNumber() - 1) * StaticM.playerShift(player)) + 1);
+
+        } //else if (where + dice > ) {
+
+
+        //}
+        else {
+            player.setFiguresPosition(figure, where + dice);
+        }
+        gamePanel.changeMap(x, y, 0);
+        if (gamePanel.whatOnLocation(x, y) > 0) {
+            for (int i = 0; i < 4; i++) {
+                if (players.get(gamePanel.whatOnLocation(x, y)).getFiguresPosition(i) == getLocationOnPath(x, y)) {
+                    players.get(gamePanel.whatOnLocation(x, y)).kickOutFigure(i);
+                    String[] strings = players.get(gamePanel.whatOnLocation(x, y)).getStartingPosition(i).split(",");
+                    int x1 = Integer.parseInt(strings[0]);
+                    int y1 = Integer.parseInt(strings[1]);
+                    gamePanel.changeMap(x1, y1, player.getOrderNumber());
                 }
             }
-            player.setFiguresPosition(figure, ((player.getOrderNumber() - 1) * StaticM.playerShift(player)) + 1 + player.getFiguresPosition(figure));
-        } else if (where+dice > player.howMuchMovable(figure)) {
-            JOptionPane.showMessageDialog(gamePanel.getFrame(), "");
-        } else {
-            player.setFiguresPosition(figure, where + dice);
         }
 
     }
 
     public String getPathLocation(int y) {
-        return path[y][0]+","+path[y][1];
+        return path[y][0] + "," + path[y][1];
     }
 
     public int getLocationOnPath(int x, int y) {
         int location = 0;
-        for (int i = 0; i < path.length; i++){
+        for (int i = 0; i < path.length; i++) {
             if (path[i][0] == x && path[i][1] == y) {
                 location = i;
             }
         }
         return location;
-    }
-
-    public int getPlayerCount() {
-        return playerCount;
     }
 
     public void setPlayerCount(int count) {

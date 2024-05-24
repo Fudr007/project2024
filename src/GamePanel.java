@@ -3,7 +3,6 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import static java.lang.Math.abs;
 
 class GamePanel extends JPanel {
@@ -19,7 +18,7 @@ class GamePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawBoard(g);
-        drawTransparent(g);
+        //drawTransparent(g);
     }
 
     public void doIt() {
@@ -43,7 +42,7 @@ class GamePanel extends JPanel {
         transparentPanel.repaint();
     }
 
-    public int getLocation(int x, int y) {
+    public int whatOnLocation(int x, int y) {
         return map[x][y];
     }
 
@@ -95,20 +94,41 @@ class GamePanel extends JPanel {
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, BOARD_SIZE * CELL_SIZE, BOARD_SIZE * CELL_SIZE);
 
+        int countR = 0;
+        int countG = 0;
+        int countB = 0;
+        int countY = 0;
+
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (map[i][j] == 5 || map[i][j] <= 0) {
                     drawPlayingArea(g, i, j, StaticM.color(map[i][j]));
-                    //System.out.println("squares");
                 }else {
-                    drawFigure(g, i, j, map[i][j]);
-                    //System.out.println("figures");
+
+                    switch (map[i][j]) {
+                        case 1 -> {
+                            countR++;
+                            drawFigure(g, i, j, map[i][j], countR);
+                        }
+                        case 2 ->{
+                            countG++;
+                            drawFigure(g, i, j, map[i][j], countG);
+                        }
+                        case 3 -> {
+                            countB++;
+                            drawFigure(g, i, j, map[i][j], countB);
+                        }
+                        case 4 -> {
+                            countY++;
+                            drawFigure(g, i, j, map[i][j], countY);
+                        }
+                    }
                 }
             }
         }
     }
 
-    public void drawTransparent(Graphics g){
+    /*public void drawTransparent(Graphics g){
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (map[i][j] < 5 || map[i][j] > 0) {
@@ -118,21 +138,21 @@ class GamePanel extends JPanel {
         }
         transparentPanel.paintAll(g);
         transparentPanel.setOpaque(true);
-    }
+    }*/
 
     public void drawPlayingArea(Graphics g, int x, int y, Color color) {
         g.setColor(color);
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-        g.setColor(Color.DARK_GRAY);
-        g.drawRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-
     }
 
-    public void drawFigure(Graphics g, int x, int y, int color) {
-        g.setColor(StaticM.color(abs(color)));
+    public void drawFigure(Graphics g, int x, int y, int color, int countColor) {
+        g.setColor(StaticM.color(-color));
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         g.setColor(StaticM.color(color));
-        g.drawRoundRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE-5, CELL_SIZE-5, CELL_SIZE-5, CELL_SIZE-5);
+        g.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE-5, CELL_SIZE-5);
+        g.setColor(StaticM.color(color).darker());
+        g.setFont(new Font("Arial", Font.BOLD, CELL_SIZE-5));
+        g.drawString(""+ countColor, (x * CELL_SIZE)+10, (y * CELL_SIZE)+40);
     }
 
     public JFrame getFrame() {
