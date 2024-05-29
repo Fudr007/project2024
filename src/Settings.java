@@ -9,7 +9,7 @@ public class Settings {
     private JButton button4 = new JButton("4 players");
     private JButton backButton = new JButton("Back to menu");
 
-    public void openSettings(Game game){
+    public void openSettings(GameMechanics gameMechanics){
         settingsFrame.setSize(400, 600);
         settingsFrame.setResizable(false);
         settingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,33 +20,32 @@ public class Settings {
         //panel.add(backButton, BorderLayout.SOUTH);
         settingsFrame.add(panel);
         button2.addActionListener(e -> {
-            game.setPlayerCount(2);
+            gameMechanics.setPlayerCount(2);
             JOptionPane.showMessageDialog(settingsFrame, "Player count set to: 2");
             settingsFrame.setVisible(false);
-            game.getMenu().frameVisible();
+            gameMechanics.getMenu().frameVisible();
         });
 
         button3.addActionListener(e -> {
-            game.setPlayerCount(3);
+            gameMechanics.setPlayerCount(3);
             JOptionPane.showMessageDialog(settingsFrame, "Player count set to: 3");
             settingsFrame.setVisible(false);
-            game.getMenu().frameVisible();
+            gameMechanics.getMenu().frameVisible();
         });
 
         button4.addActionListener(e -> {
-            game.setPlayerCount(4);
+            gameMechanics.setPlayerCount(4);
             JOptionPane.showMessageDialog(settingsFrame, "Player count set to: 4");
             settingsFrame.setVisible(false);
-            game.openMenu();
+            gameMechanics.getMenu().frameVisible();
         });
 
         /*backButton.addActionListener(e -> {
             settingsFrame.dispose();
-            game.openMenu();
+            gameMechanics.openMenu();
         });*/
 
         settingsFrame.setVisible(true);
-
     }
 
     public void frameVisible(){
