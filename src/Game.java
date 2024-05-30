@@ -12,7 +12,6 @@ public class Game {
         gameMechanics.openMenu();
         gameMechanics.player();
         gameMechanics.getGamePanel().set();
-
         for (int i = 0; i < gameMechanics.getPlayerCount(); i++) {
             gameMechanics.getPlayers().get(i).setStartingPosition();
         }

@@ -11,7 +11,7 @@ public class GameMechanics {
     private Menu menu = new Menu();
     private Dice dice = new Dice();
 
-    public GameMechanics(){
+    public GameMechanics() {
         setPath();
     }
 
@@ -36,20 +36,17 @@ public class GameMechanics {
     public void openMenu() {
         boolean ok = false;
         while (!ok) {
-            System.out.println(menu.getAction());
             menu.openMenu();
             while (menu.getAction() == -1) {
                 System.out.print("");
             }
             switch (menu.getAction()) {
                 case 0 -> {
-                    System.out.println(0);
                     System.exit(0);
                 }
                 case 1 -> {
                     if (playerCount != 0) {
                         ok = true;
-                        System.out.println(1);
                         menu.setAction(-1);
                     } else {
                         JOptionPane.showMessageDialog(menu.getFrame(), "First set player count in settings");
@@ -58,7 +55,6 @@ public class GameMechanics {
 
                 }
                 case 2 -> {
-                    System.out.println(2);
                     returnSettings();
                     menu.setAction(-1);
                 }
@@ -78,8 +74,7 @@ public class GameMechanics {
         for (int i = 0; i < playerCount; i++) {
             for (int j = 0; j < 4; j++) {
                 int[] xy = players.get(i).getFigureXY(j);
-                System.out.println(xy[0]+","+xy[1]);
-                gamePanel.changeMap(xy[0], xy[1], i);
+                gamePanel.changeMap(xy[1], xy[0], i);
             }
         }
     }
@@ -100,23 +95,21 @@ public class GameMechanics {
             gamePanel.changeMap(x, y, player.getOrderNumber());
             player.setFiguresPosition(figure, ((player.getOrderNumber() - 1) * StaticM.playerShift(player)) + 1);
         } else if (where + dice > 40 + shift && where + dice < 45 + shift) {
-            int plus = player.getOrderNumber()*4;
-            if (player.getOrderNumber() == 1){
+            int plus = player.getOrderNumber() * 4;
+            if (player.getOrderNumber() == 1) {
                 plus = 0;
             }
-            int[] xy = getPathLocation(where+dice-shift+plus);
+            int[] xy = getPathLocation(where + dice - shift + plus);
             gamePanel.changeMap(xy[0], xy[0], player.getOrderNumber());
         } else {
             player.setFiguresPosition(figure, where + dice);
         }
         if (gamePanel.whatOnLocation(x, y) > 0) {
             for (int i = 0; i < 4; i++) {
-                if (players.get(gamePanel.whatOnLocation(x, y)-1).getFiguresPosition(i) == getLocationOnPath(x, y)) {
+                if (players.get(gamePanel.whatOnLocation(x, y) - 1).getFiguresPosition(i) == getLocationOnPath(x, y)) {
                     players.get(gamePanel.whatOnLocation(x, y)).kickOutFigure(i);
-                    String[] cd = players.get(gamePanel.whatOnLocation(x, y)).getStartingPosition(i).split(",");
-                    int x1 = Integer.parseInt(cd[0]);
-                    int y1 = Integer.parseInt(cd[1]);
-                    gamePanel.changeMap(x1, y1, player.getOrderNumber());
+                    int[] cd = players.get(gamePanel.whatOnLocation(x, y)).getStartingPosition(i);
+                    gamePanel.changeMap(cd[0], cd[1], player.getOrderNumber());
                 }
             }
         }

@@ -220,8 +220,8 @@ public class Player {
 
     }
 
-    public String getStartingPosition(int whichFigure) {
-        return startingPosition[whichFigure][0] + "," + startingPosition[whichFigure][1];
+    public int[] getStartingPosition(int whichFigure) {
+        return startingPosition[whichFigure];
     }
 
     public int[] getFigureXY(int whichFigure){

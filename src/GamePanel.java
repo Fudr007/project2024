@@ -44,8 +44,8 @@ class GamePanel extends JPanel {
         return map[y][x];
     }
 
-    public int exampleLocation(int x, int y) {
-        return mapExample[y][x];
+    public int exampleLocation(int y, int x) {
+        return mapExample[x][y];
     }
 
     public void fill() throws IOException {
@@ -105,27 +105,27 @@ class GamePanel extends JPanel {
         int countB = 0;
         int countY = 0;
 
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                if (map[i][j] == 5 || map[i][j] <= 0) {
-                    drawPlayingArea(g, i, j, StaticM.color(map[i][j]));
+        for (int y = 0; y < BOARD_SIZE; y++) {
+            for (int x = 0; x < BOARD_SIZE; x++) {
+                if (map[y][x] == 5 || map[y][x] <= 0) {
+                    drawPlayingArea(g, y, x, StaticM.color(map[y][x]));
                 } else {
-                    switch (map[i][j]) {
+                    switch (map[y][x]) {
                         case 1 -> {
                             countR++;
-                            drawFigure(g, i, j, map[i][j], countR);
+                            drawFigure(g, y, x, map[y][x], countR);
                         }
                         case 2 -> {
                             countG++;
-                            drawFigure(g, i, j, map[i][j], countG);
+                            drawFigure(g, y, x, map[y][x], countG);
                         }
                         case 3 -> {
                             countB++;
-                            drawFigure(g, i, j, map[i][j], countB);
+                            drawFigure(g, y, x, map[y][x], countB);
                         }
                         case 4 -> {
                             countY++;
-                            drawFigure(g, i, j, map[i][j], countY);
+                            drawFigure(g, y, x, map[y][x], countY);
                         }
                     }
                 }
@@ -135,10 +135,10 @@ class GamePanel extends JPanel {
 
     public void drawPlayingArea(Graphics g, int x, int y, Color color) {
         g.setColor(color);
-        g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        g.fillRect(y * CELL_SIZE, x * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
 
-    public void drawFigure(Graphics g, int x, int y, int color, int countColor) {
+    public void drawFigure(Graphics g, int y, int x, int color, int countColor) {
         g.setColor(StaticM.color(mapExample[y][x]));
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         g.setColor(StaticM.color(color));
