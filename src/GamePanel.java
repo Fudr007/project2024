@@ -7,10 +7,9 @@ import java.io.IOException;
 class GamePanel extends JPanel {
 
     private final int CELL_SIZE = 50;
-    private int BOARD_SIZE = 11;
+    private final int BOARD_SIZE = 11;
     private int[][] map = new int[11][11];
     private int[][] mapExample = new int[11][11];
-    private JPanel transparentPanel = new JPanel();
     private JFrame frame = new JFrame("Man don't be angry");
 
 
@@ -32,20 +31,20 @@ class GamePanel extends JPanel {
         frame.setResizable(false);
         frame.setVisible(true);
         frame.add(GamePanel.this);
+        //returnMapa();
     }
 
-    public void changeMap(int y, int x, int who) {
-        map[y][x] = who;
-        this.repaint();
-        transparentPanel.repaint();
+    public void changeMap(int x, int y, int who) {
+        map[x][y] = who;
+        repaint();
+    }
+
+    public int exampleLocation(int x, int y) {
+        return mapExample[x][y];
     }
 
     public int whatOnLocation(int x, int y) {
-        return map[y][x];
-    }
-
-    public int exampleLocation(int y, int x) {
-        return mapExample[x][y];
+        return map[x][y];
     }
 
     public void fill() throws IOException {
@@ -58,31 +57,28 @@ class GamePanel extends JPanel {
             countX = split.length;
             countY++;
         }
-        if (countX == countY) {
-            BOARD_SIZE = countX;
-        }
-
         BufferedReader rd2 = new BufferedReader(new FileReader("map.csv"));
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            String[] split = rd2.readLine().split(",");
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                map[i][j] = Integer.parseInt(split[j]);
-                mapExample[i][j] = Integer.parseInt(split[j]);
+        if (countX == countY) {
+            for (int i = 0; i < countY; i++) {
+                String[] split = rd2.readLine().split(",");
+                for (int j = 0; j < countX; j++) {
+                    map[j][i] = Integer.parseInt(split[j]);
+                    mapExample[j][i] = Integer.parseInt(split[j]);
+                }
             }
         }
-
     }
 
-    public void returnMap(){
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                System.out.print(mapExample[i][j]);
+    /*public void returnMapa(){
+        for (int i = 0; i<11; i++){
+            for (int j = 0; j<11; j++){
+                System.out.print(mapa[i][j]+",");
             }
             System.out.println();
         }
-    }
+    }*/
 
-    public void drawBoard(Graphics g) {
+    public void drawBoard(Graphics g){
 
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
@@ -105,27 +101,28 @@ class GamePanel extends JPanel {
         int countB = 0;
         int countY = 0;
 
-        for (int y = 0; y < BOARD_SIZE; y++) {
-            for (int x = 0; x < BOARD_SIZE; x++) {
-                if (map[y][x] == 5 || map[y][x] <= 0) {
-                    drawPlayingArea(g, y, x, StaticM.color(map[y][x]));
-                } else {
-                    switch (map[y][x]) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (map[i][j] == 5 || map[i][j] <= 0) {
+                    drawPlayingArea(g, i, j, StaticM.color(map[i][j]));
+                }else {
+
+                    switch (map[i][j]) {
                         case 1 -> {
                             countR++;
-                            drawFigure(g, y, x, map[y][x], countR);
+                            drawFigure(g, i, j, map[i][j], countR);
                         }
-                        case 2 -> {
+                        case 2 ->{
                             countG++;
-                            drawFigure(g, y, x, map[y][x], countG);
+                            drawFigure(g, i, j, map[i][j], countG);
                         }
                         case 3 -> {
                             countB++;
-                            drawFigure(g, y, x, map[y][x], countB);
+                            drawFigure(g, i, j, map[i][j], countB);
                         }
                         case 4 -> {
                             countY++;
-                            drawFigure(g, y, x, map[y][x], countY);
+                            drawFigure(g, i, j, map[i][j], countY);
                         }
                     }
                 }
@@ -135,17 +132,17 @@ class GamePanel extends JPanel {
 
     public void drawPlayingArea(Graphics g, int x, int y, Color color) {
         g.setColor(color);
-        g.fillRect(y * CELL_SIZE, x * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
 
-    public void drawFigure(Graphics g, int y, int x, int color, int countColor) {
-        g.setColor(StaticM.color(mapExample[y][x]));
+    public void drawFigure(Graphics g, int x, int y, int color, int countColor) {
+        g.setColor(StaticM.color(mapExample[x][y]));
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         g.setColor(StaticM.color(color));
-        g.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE - 5, CELL_SIZE - 5);
+        g.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE-5, CELL_SIZE-5);
         g.setColor(StaticM.color(color).darker());
-        g.setFont(new Font("Arial", Font.BOLD, CELL_SIZE - 5));
-        g.drawString("" + countColor, (x * CELL_SIZE) + 10, (y * CELL_SIZE) + 40);
+        g.setFont(new Font("Arial", Font.BOLD, CELL_SIZE-5));
+        g.drawString(""+ countColor, (x * CELL_SIZE)+10, (y * CELL_SIZE)+40);
     }
 
     public JFrame getFrame() {

@@ -17,7 +17,7 @@ public class StaticM {
         Color figureGreen = new Color(0, 150, 0);
         Color figureYellow = new Color(160, 160, 0);
         return switch (number) {
-            case 0 -> Color.BLACK;
+            case 0 -> Color.DARK_GRAY;
             case -1 -> Color.RED;
             case -2 -> Color.GREEN;
             case -3 -> Color.BLUE;

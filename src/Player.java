@@ -11,8 +11,7 @@ public class Player {
     private boolean atHome = false;
     private int howManyAtHome = 0;
     private ArrayList<Integer> figuresPosition = new ArrayList<>(4);
-    private int[][] figuresPositionXY = new int[4][2];
-    private int[][] startingPosition = new int[4][2];
+    private int[][] startingPosition = new int[2][4];
     private int whichFigure = -1;
 
     public Player(String name, int orderNumber) {
@@ -148,7 +147,7 @@ public class Player {
         JFrame frame = new JFrame("Which figure do you want to move "+getName()+"?");
         JTextField textField = new JTextField(1);
         JButton button = new JButton("Enter");
-        frame.setSize(500, 150);
+        frame.setSize(300, 150);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -206,10 +205,9 @@ public class Player {
             while((line = reader.readLine()) != null){
                 String[] parts = line.split(",");
                 if (orderNumber == Integer.parseInt(parts[2])){
-                     startingPosition[count][0] = Integer.parseInt(parts[0]);
-                     startingPosition[count][1] = Integer.parseInt(parts[1]);
-                     setFiguresPositionXY(count, Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
-                     count++;
+                    startingPosition[0][count] = Integer.parseInt(parts[0]);
+                    startingPosition[1][count] = Integer.parseInt(parts[1]);
+                    count++;
                 }
             }
         } catch (IOException e) {
@@ -220,20 +218,7 @@ public class Player {
 
     }
 
-    public int[] getStartingPosition(int whichFigure) {
-        return startingPosition[whichFigure];
-    }
-
-    public int[] getFigureXY(int whichFigure){
-        return figuresPositionXY[whichFigure];
-    }
-
-    public void setFiguresPositionXY(int whichFigure, int y, int x) {
-        this.figuresPositionXY[whichFigure][0] = y;
-        this.figuresPositionXY[whichFigure][1] = x;
-    }
-
-    public void setFiguresPositionFromPath(){
-        
+    public String getStartingPosition(int whichFigure) {
+        return startingPosition[0][whichFigure] + "," + startingPosition[1][whichFigure];
     }
 }
