@@ -3,7 +3,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game {
 
@@ -14,12 +13,11 @@ public class Game {
     private Settings settings = new Settings();
     private Menu menu = new Menu();
     private Dice dice = new Dice();
-    Scanner sc = new Scanner(System.in);
     private int who = 1;
 
     public Game() {
-        openMenu();
         setPath();
+        openMenu();
     }
 
     public void setPath() {
@@ -43,20 +41,17 @@ public class Game {
     public void openMenu() {
         boolean ok = false;
         while (!ok) {
-            System.out.println(menu.getAction());
             menu.openMenu();
             while (menu.getAction() == -1) {
                 System.out.print("");
             }
             switch (menu.getAction()) {
                 case 0 -> {
-                    System.out.println(0);
                     System.exit(0);
                 }
                 case 1 -> {
                     if (playerCount != 0) {
                         ok = true;
-                        System.out.println("tady");
                         player();
                         gameStart();
                         menu.setAction(-1);
@@ -67,7 +62,6 @@ public class Game {
 
                 }
                 case 2 -> {
-                    System.out.println(2);
                     returnSettings();
                     menu.setAction(-1);
                 }
@@ -79,33 +73,31 @@ public class Game {
 
     public void gameStart() {
         gamePanel.set();
-        setFigures();
         for (int i = 0; i < playerCount; i++) {
             players.get(i).setStartingPosition();
         }
-        dice.openDice();
+        setFiguresOnmap();
+
 
         boolean end = false;
         while (!end) {
             boolean ok = false;
-            System.out.println(who);
-            dice.changeName(players.get(who - 1));
+            dice.openDice();
+            dice.setName(players.get(who - 1));
             while (dice.getThrownNumber() == 0) {
                 System.out.print("");
             }
             int which = -1;
             if (players.get(who - 1).getHowManyAtHome() < 3) {
-                while(!ok){
+                while (!ok) {
                     which = players.get(who - 1).whichFigure();
-
-                    while (which == -1) {
+                    while (which == 0) {
                         which = players.get(who - 1).getWhichFigure();
                     }
-                    System.out.println("neni");
                     if (players.get(who - 1).howMuchMovable(which) < dice.getThrownNumber()) {
                         ok = false;
                         JOptionPane.showMessageDialog(gamePanel.getFrame(), "You can't move with this one");
-                    }else{
+                    } else {
                         ok = true;
                     }
                 }
@@ -151,6 +143,7 @@ public class Game {
         for (int i = 0; i < playerCount; i++) {
             players.add(new Player());
             players.get(i).setOrderNumber(i + 1);
+            players.get(i).setColor();
         }
         for (int i = 0; i < playerCount; i++) {
             players.get(i).chooseName();
@@ -160,28 +153,32 @@ public class Game {
         }
     }
 
-    public void setFigures() {
-        try {
-            BufferedReader rd = new BufferedReader(new FileReader("homes.txt"));
-            String line;
-            while ((line = rd.readLine()) != null) {
-                String[] lineSplit = line.split(",");
-                int x = Integer.parseInt(lineSplit[0]);
-                int y = Integer.parseInt(lineSplit[1]);
-                int who = Integer.parseInt(lineSplit[2]);
-                gamePanel.changeMap(x, y, who);
+    public void setFiguresOnmap() {
+        for (int i = 0; i < playerCount; i++) {
+            for (int j = 0; j < 4; j++) {
+                gamePanel.changeMap(players.get(i).getFigure(j).getStartringx(), players.get(i).getFigure(j).getStartringy(), StaticM.colorToInt(players.get(i).getColor()));
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(gamePanel.getFrame(), "File not found, " +
-                    "check if you have every file that is needed to run this program and try again");
-            System.exit(0);
         }
     }
 
     public void moveFigure(Player player, int dice, int figure) {
-        int x = 0;
+        int x = player.getFigure(figure).getX();
+        int y = player.getFigure(figure).getY();
+        if (dice == 6 && player.getFigure(figure).getPathPosition() == 0) {
+            int[] xy = getPathLocation((player.getOrderNumber() - 1) * 10);
+            System.out.println(xy[0] + " " + xy[1]);
+            gamePanel.changeMap(xy[0], xy[1], StaticM.colorToInt(player.getColor()));
+            player.getFigure(figure).setPathPosition((player.getOrderNumber() - 1) * 10);
+            player.getFigure(figure).setXY(xy[0], xy[1]);
+            gamePanel.changeMap(x, y, gamePanel.exampleLocation(x, y));
+        }else if (player.getFigure(figure).getPathPosition() != 0){
+            int[] xy = getPathLocation(player.getFigure(figure).getPathPosition()+dice);
+            gamePanel.changeMap(xy[0], xy[1], StaticM.colorToInt(player.getColor()));
+            player.getFigure(figure).setPathPosition(player.getFigure(figure).getPathPosition()+dice);
+        }
+        /*int x = 0;
         int y = 0;
-        int where = player.getFiguresPosition(figure);
+        int where = player.getFigure(figure).getPathPosition();
         int shift = StaticM.playerShift(player);
         if (shift == 1) {
             shift = 0;
@@ -197,9 +194,9 @@ public class Game {
             x = Integer.parseInt(split[0]);
             y = Integer.parseInt(split[1]);
             gamePanel.changeMap(x, y, player.getOrderNumber());
-            player.setFiguresPosition(figure, ((player.getOrderNumber() - 1) * StaticM.playerShift(player)) + 1);
+            player.getFigure(figure).setPathPosition(((player.getOrderNumber() - 1) * StaticM.playerShift(player)) + 1);
 
-        }else if (where + dice > 40 + shift && where + dice < 45 + shift) {
+        } else if (where + dice > 40 + shift && where + dice < 45 + shift) {
             int plus = player.getOrderNumber() * 4;
             if (player.getOrderNumber() == 1) {
                 plus = 0;
@@ -207,28 +204,30 @@ public class Game {
             String[] xy = getPathLocation(where + dice - shift + plus).split(",");
             gamePanel.changeMap(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]), player.getOrderNumber());
         } else {
-            player.setFiguresPosition(figure, where + dice);
+            player.getFigure(figure).setPathPosition(where + dice);
         }
-        gamePanel.changeMap(x, y, 0);
+
         if (gamePanel.whatOnLocation(x, y) > 0) {
             for (int i = 0; i < 4; i++) {
-                if (players.get(gamePanel.whatOnLocation(x, y)).getFiguresPosition(i) == getLocationOnPath(x, y)) {
+                if (players.get(gamePanel.whatOnLocation(x, y)).getFigure(i).getPathPosition() == getLocationOnPath(x, y)) {
                     players.get(gamePanel.whatOnLocation(x, y)).kickOutFigure(i);
-                    String[] strings = players.get(gamePanel.whatOnLocation(x, y)).getStartingPosition(i).split(",");
-                    int x1 = Integer.parseInt(strings[0]);
-                    int y1 = Integer.parseInt(strings[1]);
-                    gamePanel.changeMap(x1, y1, player.getOrderNumber());
+                    gamePanel.changeMap(players.get(gamePanel.whatOnLocation(x, y)).getFigure(i).getX(), players.get(gamePanel.whatOnLocation(x, y)).getFigure(i).getY(), gamePanel.whatOnLocation(x, y));
                 }
             }
         }
 
         String[] xy = getPathLocation(where).split(",");
-        gamePanel.changeMap(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]), gamePanel.exampleLocation(Integer.parseInt(xy[0]), Integer.parseInt(xy[1])));
+        //gamePanel.changeMap(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]), gamePanel.exampleLocation(Integer.parseInt(xy[0]), Integer.parseInt(xy[1])));
+        gamePanel.changeMap(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]), player.getOrderNumber());
 
+        */
     }
 
-    public String getPathLocation(int y) {
-        return path[y][0] + "," + path[y][1];
+    public int[] getPathLocation(int y) {
+        int[] location = new int[2];
+        location[0] = path[0][y]-1;
+        location[1] = path[1][y]-1;
+        return location;
     }
 
     public int getLocationOnPath(int x, int y) {

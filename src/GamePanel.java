@@ -35,6 +35,7 @@ class GamePanel extends JPanel {
     }
 
     public void changeMap(int x, int y, int who) {
+        System.out.println(x+","+y+","+who);
         map[x][y] = who;
         repaint();
     }

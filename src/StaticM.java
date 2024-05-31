@@ -3,11 +3,10 @@ import java.awt.*;
 
 public class StaticM {
 
-    public static ArrayList<Integer> addFigures(ArrayList<Integer> list) {
-        list.add(0);
-        list.add(0);
-        list.add(0);
-        list.add(0);
+    public static ArrayList<Figure> addFigures(ArrayList<Figure> list) {
+        for (int i = 0; i < 4; i++) {
+            list.add(new Figure());
+        }
         return list;
     }
 
@@ -29,6 +28,23 @@ public class StaticM {
             case 4 -> figureYellow;
             default -> null;
         };
+    }
+
+    public static int colorToInt(Color color) {
+        int colorInt = 0;
+        if (color == Color.RED) {
+            colorInt = 1;
+        }
+        if (color == Color.GREEN) {
+            colorInt = 2;
+        }
+        if (color == Color.BLUE) {
+            colorInt = 3;
+        }
+        if (color == Color.YELLOW) {
+            colorInt = 4;
+        }
+        return colorInt;
     }
 
     public static int playerShift(Player player) {

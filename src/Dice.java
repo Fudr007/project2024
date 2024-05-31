@@ -30,15 +30,15 @@ public class Dice {
         return r.nextInt(6)+1;
     }
 
-    public void changeName(Player p){
-        diceFrame.setName(p.getName()+" is throwing");
-    }
-
     public int getThrownNumber(){
         return thrownNumber;
     }
 
     public void clearNumber(){
         this.thrownNumber = 0;
+    }
+
+    public void setName(Player player){
+        diceFrame.setName(player.getName());
     }
 }

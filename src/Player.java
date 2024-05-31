@@ -10,18 +10,19 @@ public class Player {
     private int orderNumber;
     private boolean atHome = false;
     private int howManyAtHome = 0;
-    private ArrayList<Integer> figuresPosition = new ArrayList<>(4);
-    private int[][] startingPosition = new int[2][4];
-    private int whichFigure = -1;
+    private ArrayList<Figure> figures = new ArrayList<>(4);
+    private int whichFigure = 0;
+    private Color color;
 
     public Player(String name, int orderNumber) {
         this.name = name;
         this.orderNumber = orderNumber;
-        StaticM.addFigures(figuresPosition);
+        StaticM.addFigures(figures);
     }
 
     public Player() {
-        figuresPosition = StaticM.addFigures(figuresPosition);
+        figures = StaticM.addFigures(figures);
+        setStartingPosition();
     }
 
     public String getName() {
@@ -83,8 +84,8 @@ public class Player {
 
     public boolean isAtHome() {
         int count = 0;
-        for (int i = 0; i < figuresPosition.size(); i++) {
-            count += figuresPosition.get(i);
+        for (int i = 0; i < figures.size(); i++) {
+            count += figures.get(i).getPathPosition();
         }
         if (count == 170) {
             return atHome = true;
@@ -93,20 +94,12 @@ public class Player {
         }
     }
 
-    public int getFiguresPosition(int i) {
-        return figuresPosition.get(i);
-    }
-
-    public void setFiguresPosition(int which, int i) {
-        figuresPosition.set(which, i);
-    }
-
     public boolean isMovable(int which) {
         int shift = StaticM.playerShift(Player.this);
         if (shift == 1) {
             shift = 0;
         }
-        if (figuresPosition.get(which) >= (41 + (orderNumber * shift)) && figuresPosition.get(which) <= 44 + (orderNumber * shift)) {
+        if (figures.get(which).getPathPosition() >= (41 + (orderNumber * shift)) && figures.get(which).getPathPosition() <= 44 + (orderNumber * shift)) {
             return false;
         } else {
             return true;
@@ -119,8 +112,8 @@ public class Player {
             if (shift == 1) {
                 shift = 0;
             }
-            if (figuresPosition.get(which) >= 38 + shift) {
-                return (44+shift)-(figuresPosition.get(which)+shift);
+            if (figures.get(which).getPathPosition() >= 38 + shift) {
+                return (44+shift)-(figures.get(which).getPathPosition()+shift);
             } else {
                 return 6;
             }
@@ -132,7 +125,7 @@ public class Player {
     public void setHowManyAtHome(){
         int count = 0;
         for (int i = 0; i < 4; i++) {
-            if (!isMovable(figuresPosition.get(i))){
+            if (!isMovable(figures.get(i).getPathPosition())){
                 count++;
             }
         }
@@ -194,7 +187,8 @@ public class Player {
     }
 
     public void kickOutFigure(int whichFigure){
-        figuresPosition.set(whichFigure, 0);
+        figures.get(whichFigure).setPathPosition(0);
+        figures.get(whichFigure).setXY(figures.get(whichFigure).getStartringx(), figures.get(whichFigure).getStartringy());
     }
 
     public void setStartingPosition(){
@@ -205,8 +199,7 @@ public class Player {
             while((line = reader.readLine()) != null){
                 String[] parts = line.split(",");
                 if (orderNumber == Integer.parseInt(parts[2])){
-                    startingPosition[0][count] = Integer.parseInt(parts[0]);
-                    startingPosition[1][count] = Integer.parseInt(parts[1]);
+                    figures.get(count).setStartringYX(Integer.parseInt(parts[1]), Integer.parseInt(parts[0]));
                     count++;
                 }
             }
@@ -218,7 +211,15 @@ public class Player {
 
     }
 
-    public String getStartingPosition(int whichFigure) {
-        return startingPosition[0][whichFigure] + "," + startingPosition[1][whichFigure];
+    public Figure getFigure(int whichFigure) {
+        return figures.get(whichFigure);
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor() {
+        this.color = StaticM.color(-orderNumber);
     }
 }

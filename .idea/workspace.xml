@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="fixing">
-      <change afterPath="$PROJECT_DIR$/src/Figure.java" afterDir="false" />
+    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="fixing 2, it wokrs&#10;added Figure class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Figure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameMechanics.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Settings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StaticM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StaticM.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +137,9 @@
       <workItem from="1716566104882" duration="1990000" />
       <workItem from="1717082590322" duration="43000" />
       <workItem from="1717082644104" duration="1733000" />
-      <workItem from="1717096868378" duration="7048000" />
+      <workItem from="1717096868378" duration="7138000" />
+      <workItem from="1717133110439" duration="713000" />
+      <workItem from="1717168333464" duration="10596000" />
     </task>
     <task id="LOCAL-00001" summary="created project2024.iml">
       <created>1713180149013</created>
@@ -267,7 +269,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717098328774</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="fixing 2, it wokrs&#10;added Figure class">
+      <option name="closed" value="true" />
+      <created>1717104466134</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1717104466134</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,7 +310,8 @@
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces&#10;moveFigure editing" />
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces&#10;moveFigure editing&#10;moving and figure kicking editing" />
     <MESSAGE value="fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing" />
+    <MESSAGE value="fixing 2, it wokrs&#10;added Figure class" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing 2, it wokrs&#10;added Figure class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
