@@ -104,7 +104,7 @@ public class Player {
      * @param name the name to check
      * @return true if the name is valid
      */
-    private boolean isValidName(String name) {
+    public boolean isValidName(String name) {
         return name.matches("^[a-zA-Z]{1,10}$");
     }
 
