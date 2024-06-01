@@ -4,34 +4,44 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * The Player class represents a player in the game.
+ *
+ * It contains information about the player, such as their name, order number, and figures.
+ */
 public class Player {
 
     private String name;
+
+    /**
+     * The order number of the player.
+     */
     private int orderNumber;
+
+    /**
+     * Whether the player is at home.
+     */
     private boolean atHome = false;
+
+    /**
+     * The number of figures that are at home.
+     */
     private int howManyAtHome = 0;
+
+    /**
+     * The list of figures belonging to the player.
+     */
     private ArrayList<Figure> figures = new ArrayList<>(4);
+
+    /**
+     * The index of the figure that the player wants to move.
+     */
     private int whichFigure = 0;
+
+    /**
+     * The color of the player.
+     */
     private Color color;
-
-    public Player(String name, int orderNumber) {
-        this.name = name;
-        this.orderNumber = orderNumber;
-        StaticM.addFigures(figures);
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", orderNumber=" + orderNumber +
-                ", atHome=" + atHome +
-                ", howManyAtHome=" + howManyAtHome +
-                ", figures=" + figures.toString() +
-                ", whichFigure=" + whichFigure +
-                ", color=" + color +
-                '}';
-    }
 
     public Player() {
         figures = StaticM.addFigures(figures);
@@ -42,6 +52,11 @@ public class Player {
         return name;
     }
 
+    /**
+     * The chooseName method allows the player to choose their name.
+     *
+     * @return the chosen name
+     */
     public String chooseName() {
         JFrame frame = new JFrame("Set Player Name " + getOrderNumber());
         JTextField textField = new JTextField(20);
@@ -83,6 +98,12 @@ public class Player {
         this.name = name;
     }
 
+    /**
+     * The isValidName method checks if a name is valid.
+     *
+     * @param name the name to check
+     * @return true if the name is valid
+     */
     private boolean isValidName(String name) {
         return name.matches("^[a-zA-Z]{1,10}$");
     }
@@ -95,6 +116,11 @@ public class Player {
         this.orderNumber = orderNumber;
     }
 
+    /**
+     * The isAtHome method checks if the player is at home.
+     *
+     * @return true if the player is at home
+     */
     public boolean isAtHome() {
         int count = 0;
         for (int i = 0; i < figures.size(); i++) {
@@ -107,6 +133,12 @@ public class Player {
         }
     }
 
+    /**
+     * The isMovable method checks if a figure is movable.
+     *
+     * @param which the index of the figure
+     * @return true if the figure is movable
+     */
     public boolean isMovable(int which) {
         int shift = StaticM.playerShift(Player.this);
         if (figures.get(which).getPathPosition() >= (41 + (orderNumber * shift)) && figures.get(which).getPathPosition() <= 44 + (orderNumber * shift)) {
@@ -116,19 +148,31 @@ public class Player {
         }
     }
 
+    /**
+     * The howMuchMovable method returns how much a figure can be moved.
+     *
+     * @param which the index of the figure
+     * @return the number of steps the figure can be moved
+     */
     public int howMuchMovable(int which) {
         if (isMovable(which)) {
             int shift = StaticM.playerShift(Player.this);
             if (figures.get(which).getPathPosition() >= 38 + shift) {
-                return (44+shift)-(figures.get(which).getPathPosition()+shift);
+                System.out.println((44+shift)-(figures.get(which).getPathPosition()));
+                return (44+shift)-(figures.get(which).getPathPosition());
             } else {
+                System.out.println(6);
                 return 6;
             }
         } else {
+            System.out.println(0);
             return 0;
         }
     }
 
+    /**
+     * The setHowManyAtHome method sets the number of figures that are at home.
+     */
     public void setHowManyAtHome(){
         int count = 0;
         for (int i = 0; i < 4; i++) {
@@ -143,6 +187,9 @@ public class Player {
         return howManyAtHome;
     }
 
+    /**
+     * The whichFigure method allows the player to choose which figure to move.
+     */
     public void whichFigure(){
         JFrame frame = new JFrame("Which figure do you want to move "+getName()+"?");
         JTextField textField = new JTextField(1);
@@ -189,11 +236,19 @@ public class Player {
         this.whichFigure = whichFigure;
     }
 
+    /**
+     * The kickOutFigure method kicks out a figure from its current position.
+     *
+     * @param whichFigure the index of the figure
+     */
     public void kickOutFigure(int whichFigure){
-        figures.get(whichFigure).setPathPosition(0);
+        figures.get(whichFigure).setPathPosition(-1);
         figures.get(whichFigure).setXY(figures.get(whichFigure).getStartringx(), figures.get(whichFigure).getStartringy());
     }
 
+    /**
+     * The setStartingPosition method sets the starting position of the figures.
+     */
     public void setStartingPosition(){
         try {
             BufferedReader reader = new BufferedReader(new FileReader("homes.txt"));

@@ -1,20 +1,27 @@
+/**
+ * The Figure class represent figures in the game
+ *
+ * It helps to keep track of the figures
+ */
 public class Figure {
+
     private int x;
     private int y;
-    private int startringx;
-    private int startringy;
-    private int pathPosition;
 
-    @Override
-    public String toString() {
-        return "Figure{" +
-                "x=" + x +
-                ", y=" + y +
-                ", startringx=" + startringx +
-                ", startringy=" + startringy +
-                ", pathPosition=" + pathPosition +
-                '}';
-    }
+    /**
+     * The startringx keeps x starting coordinate of the figure
+     */
+    private int startringx;
+
+    /**
+     * The startringx keeps y starting coordinate of the figure
+     */
+    private int startringy;
+
+    /**
+     * The pathPosition contains figures position on the path
+     */
+    private int pathPosition = -1;
 
     public void setXY(int x, int y) {
         this.x = x;

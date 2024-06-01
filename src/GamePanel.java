@@ -5,23 +5,58 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The GamePanel class represents the game board in the game.
+ *
+ * It displays the board, the players figures, and allows the players to move their figures.
+ */
 class GamePanel extends JPanel {
 
+    /**
+     * The size of each cell on the board.
+     */
     private final int CELL_SIZE = 50;
+
+    /**
+     * The size of the board
+     */
     private final int BOARD_SIZE = 11;
+
+    /**
+     * The map of the board, which contains the layout of the board.
+     */
     private int[][] map = new int[11][11];
+
+    /**
+     * The mapExample helps to "clean up" after the figures
+     */
     private int[][] mapExample = new int[11][11];
     private JFrame frame = new JFrame("Man don't be angry");
+
+    /**
+     * The player is helping list of players in the game.
+     */
     private ArrayList<Player> player = new ArrayList<>(4);
+
+    /**
+     * The count is helping value of turns
+     */
     private int count = 0;
 
-
+    /**
+     * Paints the game board and the players figures on the game board.
+     *
+     * @param g the Graphics object to draw on
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawBoard(g);
     }
 
+    /**
+     * The set sets up the map and the frame
+     */
     public void set() {
         try {
             fill();
@@ -36,11 +71,23 @@ class GamePanel extends JPanel {
         frame.add(GamePanel.this);
     }
 
+    /**
+     * It changes the map based on parameters
+     *
+     * @param x coordinate
+     * @param y coordinate
+     * @param who which player
+     */
     public void changeMap(int x, int y, int who) {
         map[x][y] = who;
         repaint();
     }
 
+    /**
+     * Loads players
+     *
+     * @param players the array of the players
+     */
     public void setPlayers(ArrayList<Player> players){
         for (int i = 0; i < players.size(); i++) {
             player.add(players.get(i));
@@ -52,14 +99,33 @@ class GamePanel extends JPanel {
         return player.get(i);
     }
 
+    /**
+     * It returns value of exampleMap from coords
+     *
+     * @param x coordinate
+     * @param y coordinate
+     * @return location form map
+     */
     public int exampleLocation(int x, int y) {
         return mapExample[x][y];
     }
 
+    /**
+     * It returns value of map from coords
+     *
+     * @param x coordinate
+     * @param y coordinate
+     * @return location form map
+     */
     public int whatOnLocation(int x, int y) {
         return map[x][y];
     }
 
+    /**
+     * It fills the map and exampleMap from files
+     *
+     * @throws IOException if it could not find any of the files
+     */
     public void fill() throws IOException {
         BufferedReader rd = new BufferedReader(new FileReader("map.csv"));
         String line;
@@ -82,6 +148,11 @@ class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * It draw the board to the graphics
+     *
+     * @param g the graphics
+     */
     public void drawBoard(Graphics g) {
 
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -100,35 +171,11 @@ class GamePanel extends JPanel {
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, BOARD_SIZE * CELL_SIZE, BOARD_SIZE * CELL_SIZE);
 
-        int countR = 0;
-        int countG = 0;
-        int countB = 0;
-        int countY = 0;
-
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (map[i][j] == 5 || map[i][j] <= 0) {
                     drawPlayingArea(g, i, j, StaticM.color(map[i][j]));
-                } /*else {
-                    switch (map[i][j]) {
-                        case 1 -> {
-                            countR++;
-                            drawFigure(g, i, j, map[i][j], countR);
-                        }
-                        case 2 -> {
-                            countG++;
-                            drawFigure(g, i, j, map[i][j], countG);
-                        }
-                        case 3 -> {
-                            countB++;
-                            drawFigure(g, i, j, map[i][j], countB);
-                        }
-                        case 4 -> {
-                            countY++;
-                            drawFigure(g, i, j, map[i][j], countY);
-                        }
-                    }
-                }*/
+                }
             }
         }
         if (count == 0 ){
@@ -142,17 +189,35 @@ class GamePanel extends JPanel {
             for (int i = 0; i < player.size(); i++) {
                 for (int j = 0; j < 4; j++) {
                     drawFigure(g, player.get(i).getFigure(j).getX(), player.get(i).getFigure(j).getY(), StaticM.colorToInt(player.get(i).getColor()), j+1);
+                    map[player.get(i).getFigure(j).getX()][player.get(i).getFigure(j).getY()] = StaticM.colorToInt(player.get(i).getColor());
                 }
             }
         }
 
     }
 
+    /**
+     * Draws one cell of the board based on parameters
+     *
+     * @param g the Graphics object to draw on
+     * @param x the x-coordinate of the cell
+     * @param y the y-coordinate of the cell
+     * @param color the color of the cell
+     */
     public void drawPlayingArea(Graphics g, int x, int y, Color color) {
         g.setColor(color);
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
 
+    /**
+     * Draws a figure on the game board.
+     *
+     * @param g the Graphics object to draw on
+     * @param x the x-coordinate of the figure
+     * @param y the y-coordinate of the figure
+     * @param color the color of the figure
+     * @param countColor the count of the figure
+     */
     public void drawFigure(Graphics g, int x, int y, int color, int countColor) {
         g.setColor(StaticM.color(mapExample[x][y]));
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);

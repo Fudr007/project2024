@@ -1,14 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The Settings is frame where player choose how many players will be playing
+ */
 public class Settings {
     private JFrame settingsFrame = new JFrame();
     private JPanel panel = new JPanel();
     private JButton button2 = new JButton("2 players");
     private JButton button3 = new JButton("3 players");
     private JButton button4 = new JButton("4 players");
-    private JButton backButton = new JButton("Back to menu");
 
+    /**
+     * It sets, open the settings and waits for input
+     * @param game the game
+     */
     public void openSettings(Game game){
         settingsFrame.setSize(400, 600);
         settingsFrame.setResizable(false);
@@ -17,7 +23,7 @@ public class Settings {
         panel.add(button2, BorderLayout.NORTH);
         panel.add(button3, BorderLayout.CENTER);
         panel.add(button4, BorderLayout.SOUTH);
-        //panel.add(backButton, BorderLayout.SOUTH);
+
         settingsFrame.add(panel);
         button2.addActionListener(e -> {
             game.setPlayerCount(2);
@@ -40,19 +46,6 @@ public class Settings {
             game.getMenu().frameVisible();
         });
 
-        /*backButton.addActionListener(e -> {
-            settingsFrame.dispose();
-            gameMechanics.openMenu();
-        });*/
-
         settingsFrame.setVisible(true);
-    }
-
-    public void frameVisible(){
-        settingsFrame.setVisible(true);
-    }
-
-    public void frameInvisible(){
-        settingsFrame.setVisible(false);
     }
 }

@@ -1,16 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+/**
+ * Its the menu where the player is choosing what to do
+ */
 public class Menu {
     private JFrame menuFrame = new JFrame();
     private JButton settingsButton = new JButton("Settings");
     private JButton exitButton = new JButton("Exit");
     private JButton startButton = new JButton("Start");
+
+    /**
+     * It contains value of the chosen action
+     */
     private int action = -1;
     private JPanel panel = new JPanel();
 
+    /**
+     * It sets, opens the menu frame and waits for action
+     */
     public void openMenu(){
         menuFrame.setSize(400, 600);
         menuFrame.setResizable(false);
@@ -47,9 +55,6 @@ public class Menu {
 
     public void frameVisible(){
         menuFrame.setVisible(true);
-    }
-    public void frameInvisible(){
-        menuFrame.setVisible(false);
     }
     public JFrame getFrame() {
         return menuFrame;
