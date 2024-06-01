@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="fixing 2, it wokrs&#10;added Figure class">
+    <list default="true" id="e3a4d0b9-6f2c-4593-bc2b-1781310387c9" name="Changes" comment="fixed moving with figures">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_05_2024_21_31_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_05_2024_21_31__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2024_19_46__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2024_19_46__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Figure.java" afterDir="false" />
@@ -140,7 +142,7 @@
       <workItem from="1717133110439" duration="713000" />
       <workItem from="1717168333464" duration="10596000" />
       <workItem from="1717225636268" duration="1044000" />
-      <workItem from="1717234413906" duration="790000" />
+      <workItem from="1717234413906" duration="824000" />
     </task>
     <task id="LOCAL-00001" summary="created project2024.iml">
       <created>1713180149013</created>
@@ -278,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717104466134</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fixed moving with figures">
+      <option name="closed" value="true" />
+      <created>1717237694609</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1717237694609</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +322,8 @@
     <MESSAGE value="created project2024.iml&#10;added GamePanel.java&#10;added drawing the board&#10;adjustment of format&#10;added Player class&#10;added Game class&#10;added Static class&#10;experimenting with the board&#10;menu added&#10;settings added&#10;returning to menu not working&#10;menu fully working&#10;optimised drawing board&#10;drawing figures on transparent panel not working&#10;added moving figures - not fully working&#10;edited game proces&#10;moveFigure editing&#10;moving and figure kicking editing" />
     <MESSAGE value="fixing" />
     <MESSAGE value="fixing 2, it wokrs&#10;added Figure class" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing 2, it wokrs&#10;added Figure class" />
+    <MESSAGE value="fixed moving with figures" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed moving with figures" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
