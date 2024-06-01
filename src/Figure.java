@@ -5,6 +5,17 @@ public class Figure {
     private int startringy;
     private int pathPosition;
 
+    @Override
+    public String toString() {
+        return "Figure{" +
+                "x=" + x +
+                ", y=" + y +
+                ", startringx=" + startringx +
+                ", startringy=" + startringy +
+                ", pathPosition=" + pathPosition +
+                '}';
+    }
+
     public void setXY(int x, int y) {
         this.x = x;
         this.y = y;

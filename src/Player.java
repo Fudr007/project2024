@@ -20,6 +20,19 @@ public class Player {
         StaticM.addFigures(figures);
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", orderNumber=" + orderNumber +
+                ", atHome=" + atHome +
+                ", howManyAtHome=" + howManyAtHome +
+                ", figures=" + figures.toString() +
+                ", whichFigure=" + whichFigure +
+                ", color=" + color +
+                '}';
+    }
+
     public Player() {
         figures = StaticM.addFigures(figures);
         setStartingPosition();
@@ -96,9 +109,6 @@ public class Player {
 
     public boolean isMovable(int which) {
         int shift = StaticM.playerShift(Player.this);
-        if (shift == 1) {
-            shift = 0;
-        }
         if (figures.get(which).getPathPosition() >= (41 + (orderNumber * shift)) && figures.get(which).getPathPosition() <= 44 + (orderNumber * shift)) {
             return false;
         } else {
@@ -109,9 +119,6 @@ public class Player {
     public int howMuchMovable(int which) {
         if (isMovable(which)) {
             int shift = StaticM.playerShift(Player.this);
-            if (shift == 1) {
-                shift = 0;
-            }
             if (figures.get(which).getPathPosition() >= 38 + shift) {
                 return (44+shift)-(figures.get(which).getPathPosition()+shift);
             } else {
@@ -136,11 +143,11 @@ public class Player {
         return howManyAtHome;
     }
 
-    public int whichFigure(){
+    public void whichFigure(){
         JFrame frame = new JFrame("Which figure do you want to move "+getName()+"?");
         JTextField textField = new JTextField(1);
         JButton button = new JButton("Enter");
-        frame.setSize(300, 150);
+        frame.setSize((name.length()*6+400), 150);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -171,11 +178,7 @@ public class Player {
             }
         });
         frame.setVisible(true);
-        int remember = getWhichFigure();
-        System.out.println(getWhichFigure());
         setWhichFigure(0);
-        System.out.println(remember);
-        return remember;
     }
 
     public int getWhichFigure() {
@@ -200,6 +203,7 @@ public class Player {
                 String[] parts = line.split(",");
                 if (orderNumber == Integer.parseInt(parts[2])){
                     figures.get(count).setStartringYX(Integer.parseInt(parts[1]), Integer.parseInt(parts[0]));
+                    figures.get(count).setXY(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
                     count++;
                 }
             }

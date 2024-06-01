@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 class GamePanel extends JPanel {
 
@@ -11,6 +12,8 @@ class GamePanel extends JPanel {
     private int[][] map = new int[11][11];
     private int[][] mapExample = new int[11][11];
     private JFrame frame = new JFrame("Man don't be angry");
+    private ArrayList<Player> player = new ArrayList<>(4);
+    private int count = 0;
 
 
     @Override
@@ -31,13 +34,22 @@ class GamePanel extends JPanel {
         frame.setResizable(false);
         frame.setVisible(true);
         frame.add(GamePanel.this);
-        //returnMapa();
     }
 
     public void changeMap(int x, int y, int who) {
-        System.out.println(x+","+y+","+who);
         map[x][y] = who;
         repaint();
+    }
+
+    public void setPlayers(ArrayList<Player> players){
+        for (int i = 0; i < players.size(); i++) {
+            player.add(players.get(i));
+        }
+        repaint();
+    }
+
+    public Player getPlayer(int i){
+        return player.get(i);
     }
 
     public int exampleLocation(int x, int y) {
@@ -70,16 +82,7 @@ class GamePanel extends JPanel {
         }
     }
 
-    /*public void returnMapa(){
-        for (int i = 0; i<11; i++){
-            for (int j = 0; j<11; j++){
-                System.out.print(mapa[i][j]+",");
-            }
-            System.out.println();
-        }
-    }*/
-
-    public void drawBoard(Graphics g){
+    public void drawBoard(Graphics g) {
 
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
@@ -106,14 +109,13 @@ class GamePanel extends JPanel {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (map[i][j] == 5 || map[i][j] <= 0) {
                     drawPlayingArea(g, i, j, StaticM.color(map[i][j]));
-                }else {
-
+                } /*else {
                     switch (map[i][j]) {
                         case 1 -> {
                             countR++;
                             drawFigure(g, i, j, map[i][j], countR);
                         }
-                        case 2 ->{
+                        case 2 -> {
                             countG++;
                             drawFigure(g, i, j, map[i][j], countG);
                         }
@@ -126,9 +128,24 @@ class GamePanel extends JPanel {
                             drawFigure(g, i, j, map[i][j], countY);
                         }
                     }
+                }*/
+            }
+        }
+        if (count == 0 ){
+            for (int i = 0; i < player.size(); i++) {
+                for (int j = 0; j < 4; j++) {
+                    drawFigure(g, player.get(i).getFigure(j).getStartringx(), player.get(i).getFigure(j).getStartringy(), StaticM.colorToInt(player.get(i).getColor()), j+1);
+                }
+            }
+            count++;
+        }else{
+            for (int i = 0; i < player.size(); i++) {
+                for (int j = 0; j < 4; j++) {
+                    drawFigure(g, player.get(i).getFigure(j).getX(), player.get(i).getFigure(j).getY(), StaticM.colorToInt(player.get(i).getColor()), j+1);
                 }
             }
         }
+
     }
 
     public void drawPlayingArea(Graphics g, int x, int y, Color color) {
@@ -140,10 +157,10 @@ class GamePanel extends JPanel {
         g.setColor(StaticM.color(mapExample[x][y]));
         g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         g.setColor(StaticM.color(color));
-        g.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE-5, CELL_SIZE-5);
+        g.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE - 5, CELL_SIZE - 5);
         g.setColor(StaticM.color(color).darker());
-        g.setFont(new Font("Arial", Font.BOLD, CELL_SIZE-5));
-        g.drawString(""+ countColor, (x * CELL_SIZE)+10, (y * CELL_SIZE)+40);
+        g.setFont(new Font("Arial", Font.BOLD, CELL_SIZE - 5));
+        g.drawString("" + countColor, (x * CELL_SIZE) + 10, (y * CELL_SIZE) + 40);
     }
 
     public JFrame getFrame() {

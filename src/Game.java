@@ -9,7 +9,7 @@ public class Game {
     private int[][] path = new int[3][55];
     private GamePanel gamePanel = new GamePanel();
     private int playerCount = 0;
-    private ArrayList<Player> players = new ArrayList<>();
+    public ArrayList<Player> players = new ArrayList<>();
     private Settings settings = new Settings();
     private Menu menu = new Menu();
     private Dice dice = new Dice();
@@ -53,6 +53,7 @@ public class Game {
                     if (playerCount != 0) {
                         ok = true;
                         player();
+                        gamePanel.setPlayers(players);
                         gameStart();
                         menu.setAction(-1);
                     } else {
@@ -66,9 +67,7 @@ public class Game {
                     menu.setAction(-1);
                 }
             }
-
         }
-
     }
 
     public void gameStart() {
@@ -76,25 +75,24 @@ public class Game {
         for (int i = 0; i < playerCount; i++) {
             players.get(i).setStartingPosition();
         }
-        setFiguresOnmap();
-
+        gamePanel.setPlayers(players);
 
         boolean end = false;
         while (!end) {
             boolean ok = false;
+            gamePanel.setPlayers(players);
             dice.openDice();
             dice.setName(players.get(who - 1));
             while (dice.getThrownNumber() == 0) {
                 System.out.print("");
             }
-            int which = -1;
             if (players.get(who - 1).getHowManyAtHome() < 3) {
                 while (!ok) {
-                    which = players.get(who - 1).whichFigure();
-                    while (which == 0) {
-                        which = players.get(who - 1).getWhichFigure();
+                    players.get(who - 1).whichFigure();
+                    while (players.get(who - 1).getWhichFigure() == 0) {
+                        System.out.print("");
                     }
-                    if (players.get(who - 1).howMuchMovable(which) < dice.getThrownNumber()) {
+                    if (players.get(who - 1).howMuchMovable(players.get(who - 1).getWhichFigure() - 1) < dice.getThrownNumber()) {
                         ok = false;
                         JOptionPane.showMessageDialog(gamePanel.getFrame(), "You can't move with this one");
                     } else {
@@ -104,12 +102,12 @@ public class Game {
             } else {
                 for (int i = 0; i < 4; i++) {
                     if (players.get(who - 1).isMovable(i)) {
-                        which = i;
+                        players.get(who - 1).setWhichFigure(i);
                     }
                 }
             }
 
-            moveFigure(players.get(who - 1), dice.getThrownNumber(), which);
+            moveFigure(players.get(who - 1), dice.getThrownNumber(), players.get(who - 1).getWhichFigure() - 1);
             //end
             for (int i = 0; i < playerCount; i++) {
                 if (players.get(i).isAtHome()) {
@@ -153,29 +151,29 @@ public class Game {
         }
     }
 
-    public void setFiguresOnmap() {
-        for (int i = 0; i < playerCount; i++) {
-            for (int j = 0; j < 4; j++) {
-                gamePanel.changeMap(players.get(i).getFigure(j).getStartringx(), players.get(i).getFigure(j).getStartringy(), StaticM.colorToInt(players.get(i).getColor()));
-            }
-        }
-    }
-
     public void moveFigure(Player player, int dice, int figure) {
         int x = player.getFigure(figure).getX();
         int y = player.getFigure(figure).getY();
         if (dice == 6 && player.getFigure(figure).getPathPosition() == 0) {
+            x = player.getFigure(figure).getStartringx();
+            y = player.getFigure(figure).getStartringy();
             int[] xy = getPathLocation((player.getOrderNumber() - 1) * 10);
-            System.out.println(xy[0] + " " + xy[1]);
-            gamePanel.changeMap(xy[0], xy[1], StaticM.colorToInt(player.getColor()));
             player.getFigure(figure).setPathPosition((player.getOrderNumber() - 1) * 10);
             player.getFigure(figure).setXY(xy[0], xy[1]);
-            gamePanel.changeMap(x, y, gamePanel.exampleLocation(x, y));
-        }else if (player.getFigure(figure).getPathPosition() != 0){
-            int[] xy = getPathLocation(player.getFigure(figure).getPathPosition()+dice);
-            gamePanel.changeMap(xy[0], xy[1], StaticM.colorToInt(player.getColor()));
-            player.getFigure(figure).setPathPosition(player.getFigure(figure).getPathPosition()+dice);
+        } else if (player.getFigure(figure).getPathPosition() + dice > 40 + StaticM.playerShift(player) && player.getFigure(figure).getPathPosition() + dice < 45 + StaticM.playerShift(player)) {
+            int plus = player.getOrderNumber() * 4;
+            if (player.getOrderNumber() == 1) {
+                plus = 0;
+            }
+            int[] xy = getPathLocation(player.getFigure(figure).getPathPosition() + dice - StaticM.playerShift(player) + plus);
+            gamePanel.changeMap(xy[0], xy[1], player.getOrderNumber());
+        } else if(player.getFigure(figure).getPathPosition() != 0) {
+            int[] xy = getPathLocation(player.getFigure(figure).getPathPosition() + dice);
+            player.getFigure(figure).setPathPosition(player.getFigure(figure).getPathPosition() + dice);
+            player.getFigure(figure).setXY(xy[0], xy[1]);
         }
+        gamePanel.changeMap(x, y, gamePanel.exampleLocation(x, y));
+        gamePanel.setPlayers(players);
         /*int x = 0;
         int y = 0;
         int where = player.getFigure(figure).getPathPosition();
@@ -225,8 +223,8 @@ public class Game {
 
     public int[] getPathLocation(int y) {
         int[] location = new int[2];
-        location[0] = path[0][y]-1;
-        location[1] = path[1][y]-1;
+        location[0] = path[0][y] - 1;
+        location[1] = path[1][y] - 1;
         return location;
     }
 
